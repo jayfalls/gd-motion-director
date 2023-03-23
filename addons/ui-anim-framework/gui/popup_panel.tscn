@@ -1,0 +1,129 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3rkro42ix21j"]
+
+[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/popup_panel.gd" id="1_3jldh"]
+
+[node name="PopupPanel" type="PopupPanel"]
+initial_position = 2
+size = Vector2i(308, 240)
+visible = true
+script = ExtResource("1_3jldh")
+
+[node name="LineEditPopup" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -116.0
+offset_right = 150.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LineEditPopup"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PopupTitleLabel" type="Label" parent="LineEditPopup/VBoxContainer"]
+layout_mode = 2
+text = "UI Animation Popup
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PopupDescriptionLabel" type="Label" parent="LineEditPopup/VBoxContainer"]
+layout_mode = 2
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="LineEditPopup/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="WarningLabel" type="Label" parent="LineEditPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.894118, 0.372549, 0, 1)
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LineEditPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="LineEditPopup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Cancel"
+
+[node name="ConfirmButton" type="Button" parent="LineEditPopup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Confirm"
+
+[node name="YesNoPopup" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -116.0
+offset_right = 150.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="YesNoPopup"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PopupTitleLabel" type="Label" parent="YesNoPopup/VBoxContainer"]
+layout_mode = 2
+text = "UI Animation Popup
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PopupDescriptionLabel" type="Label" parent="YesNoPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.498039, 0, 1)
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="YesNoPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="YesButton" type="Button" parent="YesNoPopup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="YesNoPopup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "No
+"
+
+[connection signal="text_changed" from="LineEditPopup/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="LineEditPopup/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="LineEditPopup/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="YesNoPopup/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="YesNoPopup/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
