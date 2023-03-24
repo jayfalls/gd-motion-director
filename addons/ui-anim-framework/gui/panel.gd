@@ -7,8 +7,18 @@ class_name UIAnimationPanel extends Control
 var interface: EditorSelection
 
 ## Children
+@onready var tab_container: TabContainer = $MarginContainer/TabContainer
 @onready var popup_panel: UIAnimationPopupPanel = $PopupPanel
 @onready var scene_tool_interface: UIAnimationInterface = $MarginContainer/TabContainer/SceneToolInterface
+@onready var animations_interface: UIAnimationInterface = $MarginContainer/TabContainer/AnimationsInterface
+@onready var settings_interface: UIAnimationInterface = $MarginContainer/SettingsInterface
+@onready var settings_button: Button = $MarginContainer/MarginContainer/SettingsButton
+
+## Constants
+enum tabs {
+	SCENE_TOOL,
+	ANIMATIONS
+}
 
 ## Realtime
 ### Popup
@@ -18,24 +28,35 @@ var popup_callable: Callable
 # INITIALISATION
 func _ready():
 	_prepare_interfaces()
-	_populate_ui()
-	interface.selection_changed.connect(_populate_ui)
+	_update_ui()
+	interface.selection_changed.connect(_update_ui)
 
 func _prepare_interfaces() -> void:
+	tab_container.show()
+	settings_interface.hide()
+	# Settings Interface
+	settings_button.settings_toggle.connect(_toggle_settings, CONNECT_PERSIST)
+	
 	# Scene Tool Interface
 	scene_tool_interface.main_panel = self
 	scene_tool_interface.interface = interface
 
 
-# POPULATE UI
-func _populate_ui() -> void:
-	scene_tool_interface._populate_interface()
-	_update_ui()
-
-
-# UI UPDATES
+# POPULATE/UPDATE UI
 func _update_ui() -> void:
-	scene_tool_interface._update_interface()
+	match tab_container.current_tab:
+		tabs.SCENE_TOOL:
+			scene_tool_interface.update_ui()
+		tabs.ANIMATIONS:
+			animations_interface.update_ui()
+
+func _toggle_settings() -> void:
+	if settings_button.is_exit:
+		tab_container.show()
+		settings_interface.hide()
+	else:
+		tab_container.hide()
+		settings_interface.show()
 
 
 # POPUPS
@@ -45,7 +66,7 @@ func _popup_closed() -> void:
 	elif popup_panel.yn_confirmed.is_connected(popup_callable):
 		popup_panel.yn_confirmed.disconnect(popup_callable)
 	
-	_populate_ui()
+	_update_ui()
 
 func line_edit_popup(call: Callable, description: String, invalid_texts: PackedStringArray = [""]) -> void:
 	popup_panel.invalid_texts = invalid_texts

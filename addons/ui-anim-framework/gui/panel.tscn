@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://djdfwar13aryf"]
+[gd_scene load_steps=12 format=3 uid="uid://djdfwar13aryf"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/panel.gd" id="1_3prwa"]
 [ext_resource type="PackedScene" uid="uid://ca420jsxf3hv5" path="res://addons/ui-anim-framework/gui/components/scene_tool_interface.tscn" id="2_oomwt"]
 [ext_resource type="PackedScene" uid="uid://nh0tq54d35gh" path="res://addons/ui-anim-framework/gui/components/animations_interface.tscn" id="3_v5awg"]
+[ext_resource type="PackedScene" uid="uid://b16aqq6b60d2f" path="res://addons/ui-anim-framework/gui/components/settings_interface.tscn" id="4_in8wj"]
 [ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/popup_panel.tscn" id="5_chn2x"]
+[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/settings_button.gd" id="6_n0vm4"]
 [ext_resource type="Texture2D" uid="uid://wawu4yd53kgs" path="res://addons/ui-anim-framework/gui/icons/settings_icon.png" id="7_f45h2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5sm3n"]
@@ -36,6 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/side_margin = -1
 clip_tabs = false
@@ -45,6 +48,9 @@ layout_mode = 2
 
 [node name="AnimationsInterface" parent="MarginContainer/TabContainer" instance=ExtResource("3_v5awg")]
 visible = false
+layout_mode = 2
+
+[node name="SettingsInterface" parent="MarginContainer" instance=ExtResource("4_in8wj")]
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
@@ -61,9 +67,11 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_q0kg1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_1mym8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qpsfl")
 icon = ExtResource("7_f45h2")
+script = ExtResource("6_n0vm4")
 
 [node name="PopupPanel" parent="." instance=ExtResource("5_chn2x")]
 visible = false
 
-[connection signal="repopulate" from="MarginContainer/TabContainer/SceneToolInterface" to="." method="_populate_ui"]
+[connection signal="repopulate" from="MarginContainer/TabContainer/SceneToolInterface" to="." method="_update_ui"]
+[connection signal="repopulate" from="MarginContainer/TabContainer/AnimationsInterface" to="." method="_update_ui"]
 [connection signal="popup_hide" from="PopupPanel" to="." method="_popup_closed"]

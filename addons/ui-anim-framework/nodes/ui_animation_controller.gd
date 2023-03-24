@@ -16,14 +16,23 @@ var edited_scene_root: Node
 @export var grouped_nodes: Dictionary # All the groups and their nodes
 
 ## Events
+enum MODES {
+	SINGLE_GROUP,
+	SINGLE_NODE,
+	MULTIPLE_GROUPS,
+	ALL_GROUPS
+}
+@export var events: PackedStringArray
+@export var unique_animations: Dictionary # All the unique animations and their names
+@export var event_animations: Dictionary # All the events and their animations
+@export var event_modes: Dictionary # All the events and their group modes
+@export var event_groups: Dictionary # All the events and their groups
 
 ## Triggers
 
 
 # INITIALISATION
 func _ready():
-	if not self.renamed.is_connected(_get_configuration_warnings):
-		self.renamed.connect(_get_configuration_warnings)
 	_get_configuration_warnings()
 	notify_property_list_changed()
 
@@ -35,8 +44,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("UIAnimationController needs to be child of root node")
 	return warnings
 
-## Happens when the node is reparented
 func _notification(what):
+	# Happens when the node is reparented
 	if what == NOTIFICATION_PARENTED:
 		_get_configuration_warnings()
 
@@ -70,7 +79,7 @@ func _get_property_list():
 
 
 # UPDATE VALUES
-## Groups
+## Groups & Nodes
 ### Modification
 func rename_group(old_name: String, new_name: String) -> void:
 	var index: int = groups.find(old_name)
@@ -83,6 +92,12 @@ func rename_node(path: NodePath, new_name: String) -> void:
 	unique_nodes[path] = new_name
 
 ### Deletion
+func remove_group(group_name: String) -> void:
+	grouped_nodes.erase(group_name)
+	var control_index: int = groups.find(group_name)
+	groups.remove_at(control_index)
+	_remove_unique_nodes()
+
 func _remove_unique_nodes() -> void:
 	# Create a list of all nodes in every group
 	var all_grouped_nodes: Array[NodePath]
@@ -97,9 +112,3 @@ func _remove_unique_nodes() -> void:
 	for node in unique_nodes.keys():
 		if not node in all_unique_nodes:
 			unique_nodes.erase(node)
-
-func remove_group(group_name: String) -> void:
-	grouped_nodes.erase(group_name)
-	var control_index: int = groups.find(group_name)
-	groups.remove_at(control_index)
-	_remove_unique_nodes()

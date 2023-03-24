@@ -7,21 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/select_up_icon.png" id="4_eaehi"]
 [ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/select_down_icon.png" id="5_jtoq7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrs7e"]
-content_margin_left = 10.0
-content_margin_top = 1.0
-content_margin_right = 10.0
-content_margin_bottom = 1.0
-bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kuib1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwp5y"]
-bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xyrl7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sq2ue"]
 
@@ -46,6 +32,20 @@ bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1c8y"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrs7e"]
+content_margin_left = 10.0
+content_margin_top = 1.0
+content_margin_right = 10.0
+content_margin_bottom = 1.0
+bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwp5y"]
+bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w1oh1"]
 size = Vector2(10, 10)
 
@@ -57,6 +57,7 @@ script = ExtResource("1_ikslr")
 
 [node name="NoneDetectedInterface" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="NoneDetectedTitleLabel" type="Label" parent="NoneDetectedInterface"]
@@ -79,7 +80,6 @@ text = "Create
 
 [node name="DetectedInterface" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DetectedInterface"]
@@ -128,8 +128,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 110)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_qrs7e")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kuib1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xyrl7")
 
 [node name="HSeparator" type="HSeparator" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Groups/VBoxContainer"]
 layout_mode = 2
@@ -138,7 +137,6 @@ theme_override_constants/separation = 2
 [node name="ToolsPanel" type="PanelContainer" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Groups/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwp5y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel"]
 layout_mode = 2
@@ -146,6 +144,7 @@ theme_override_constants/separation = 45
 alignment = 1
 
 [node name="GroupsAddButton" type="Button" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
@@ -154,6 +153,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_j0klg")
 icon = ExtResource("1_8wnue")
 
 [node name="GroupsRenameButton" type="Button" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
@@ -162,6 +162,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
 icon = ExtResource("2_lgplg")
 
 [node name="GroupsDeleteButton" type="Button" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
@@ -190,7 +191,6 @@ custom_minimum_size = Vector2(200, 110)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qrs7e")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_j62t6")
 
 [node name="HSeparator" type="HSeparator" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Nodes/VBoxContainer"]
@@ -200,7 +200,6 @@ theme_override_constants/separation = 2
 [node name="ToolsPanel" type="PanelContainer" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Nodes/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwp5y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel"]
 layout_mode = 2
@@ -208,6 +207,7 @@ theme_override_constants/separation = 35
 alignment = 1
 
 [node name="NodesSelectUpButton" type="Button" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
@@ -217,6 +217,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
 icon = ExtResource("4_eaehi")
 
 [node name="NodesSelectDownButton" type="Button" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")

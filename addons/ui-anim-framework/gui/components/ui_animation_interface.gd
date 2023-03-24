@@ -9,12 +9,18 @@ signal repopulate
 ## References
 @onready var main_panel: UIAnimationPanel
 
-# POPULATE UI
+
+# POPULATE/UPDATE UI
+func update_ui() -> void:
+	_populate_interface()
+	_update_interface()
+
 func _populate_interface() -> void:
 	pass
 
+func _update_interface() -> void:
+	pass
 
-# UI UPDATES
 ## Toggle between interfaces
 func interface_toggle(group: PackedStringArray, index: int) -> void:
 	if self[group[index]].visible:

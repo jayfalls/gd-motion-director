@@ -10,7 +10,6 @@ var panel: UIAnimationPanel
 # INTIALISATION
 func _init():
 	name = "UIAnimFrameworkPluginPlugin"
-	#add_autoload_singleton("BeehaveGlobalMetrics", "res://addons/beehave/metrics/beehave_global_metrics.gd")
 	print("UI Animation Framework initialized!")
 
 

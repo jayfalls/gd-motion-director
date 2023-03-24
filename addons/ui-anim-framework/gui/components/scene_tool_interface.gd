@@ -15,11 +15,17 @@ var controller: UIAnimationController
 @onready var selected_scene_tool: OptionButton = $%SceneToolOptions
 #### Groups & Nodes Interface
 @onready var groups_interface: MarginContainer = $%GroupsInterface
+##### Groups
 @onready var groups_list: ItemList = $%GroupsList
+@onready var groups_rename_button: Button = $%GroupsRenameButton
+@onready var groups_delete_button: Button = $%GroupsDeleteButton
+##### Nodes
 @onready var nodes_list: ItemList = $%NodesList
 @onready var add_node_button: Button = $%AddNodeButton
 @onready var add_node_name_label: Label = $%AddNodeNameLabel
 @onready var node_renamed_to_label: Label = $%NodeRenamedLabel
+@onready var nodes_select_up_button: Button = $%NodesSelectUpButton
+@onready var nodes_select_down_button: Button = $%NodesSelectDownButton
 @onready var rename_node_button: Button = $%NodesRenameButton
 @onready var delete_node_button: Button = $%NodesDeleteButton
 #### Events Interface
@@ -67,7 +73,10 @@ func _populate_interface() -> void:
 			pass
 
 func _populate_groups_scene_tool() -> void:
-	# Groups List
+	_populate_groups_list()
+	_populate_nodes_list()
+
+func _populate_groups_list() -> void:
 	var selected_group_index: int = 0
 	if groups_list.item_count > 0:
 		selected_group_index = groups_list.get_selected_items()[0]
@@ -81,8 +90,8 @@ func _populate_groups_scene_tool() -> void:
 		selected_group = controller.groups[selected_group_index]
 	else:
 		selected_group = ""
-	
-	# Nodes List
+
+func _populate_nodes_list() -> void:
 	nodes_list.clear()
 	update_selected_group_nodes()
 	if not selected_group_nodes.is_empty():
@@ -101,6 +110,7 @@ func _update_interface() -> void:
 		return
 	
 	interface_toggle(scene_tool_main_interfaces, 1)
+	_update_groups_ui()
 	_update_nodes_ui()
 
 func _get_editor_information() -> void:
@@ -113,6 +123,16 @@ func _get_editor_information() -> void:
 	else:
 		selected_editor_node = selected_editor_nodes[0]
 		selected_node_path = _editor_path_to_run_path(selected_editor_node.get_path())
+
+## Groups List
+func _update_groups_ui() -> void:
+	if controller.groups.size() > 0:
+		groups_rename_button.disabled = false
+		groups_delete_button.disabled = false
+	else:
+		groups_rename_button.disabled = true
+		groups_delete_button.disabled = true
+	
 
 ## Nodes List
 func _update_nodes_ui() -> void:
@@ -130,6 +150,13 @@ func _update_node_list() -> void:
 		node_list_index = index
 
 func _update_manipulate_nodes_buttons() -> void:
+	if selected_group_nodes.size() > 1:
+		nodes_select_up_button.disabled = false
+		nodes_select_down_button.disabled = false
+	else:
+		nodes_select_up_button.disabled = true
+		nodes_select_down_button.disabled = true
+	
 	add_node_button.disabled = true
 	rename_node_button.disabled = true
 	delete_node_button.disabled = true

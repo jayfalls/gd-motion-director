@@ -10,12 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Godot UI Animation Framework"
+config/name="Godot Ui Animation Framework"
 config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
 
 [autoload]
 
-BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 gd="*res://addons/godot-action/utils_gd_action.tscn"
 
 [display]
@@ -25,4 +25,4 @@ window/size/viewport_height=600
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/godot-action/plugin.cfg", "res://addons/ui-anim-framework/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-action/plugin.cfg", "res://addons/ui-anim-framework/plugin.cfg")

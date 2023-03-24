@@ -1,11 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhylx16upet74"]
+[gd_scene load_steps=2 format=3 uid="uid://2am8ya2j2yyy"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/nodes/ui_animation_controller.gd" id="1_87tl7"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="UIAnimationController" type="Node" parent="."]
-script = ExtResource("1_87tl7")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -18,3 +15,20 @@ script = ExtResource("1_87tl7")
 [node name="Node2D5" type="Node2D" parent="."]
 
 [node name="Node2D6" type="Node2D" parent="."]
+
+[node name="UIAnimationController" type="Node" parent="."]
+script = ExtResource("1_87tl7")
+groups = PackedStringArray("sha")
+unique_nodes = {
+NodePath("UIAnimationController"): "UIAnimationController"
+}
+grouped_nodes = {
+"": Array[NodePath]([NodePath("UIAnimationController")])
+}
+groups = PackedStringArray("sha")
+unique_nodes = {
+NodePath("UIAnimationController"): "UIAnimationController"
+}
+grouped_nodes = {
+"": Array[NodePath]([NodePath("UIAnimationController")])
+}
