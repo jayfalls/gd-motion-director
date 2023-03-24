@@ -7,7 +7,7 @@ class_name UIAnimationController extends Node
 const is_ui_anim: Object = null
 
 # References
-var panel: UIAnimationPanel
+var edited_scene_root: Node
 
 ## Values
 ### Groups
@@ -25,20 +25,48 @@ func _ready():
 	if not self.renamed.is_connected(_get_configuration_warnings):
 		self.renamed.connect(_get_configuration_warnings)
 	_get_configuration_warnings()
+	notify_property_list_changed()
 
 
 # ERROR HANDLING
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray
-	var root: Node = get_tree().edited_scene_root
-	if get_parent() != root:
-		warnings.append("UIAnimationController needs to be directly under root node")
+	if get_parent() != edited_scene_root:
+		warnings.append("UIAnimationController needs to be child of root node")
 	return warnings
 
 ## Happens when the node is reparented
 func _notification(what):
 	if what == NOTIFICATION_PARENTED:
 		_get_configuration_warnings()
+
+
+# UPDATE EDITOR UI
+## Hide the export variables from the editor
+func _get_property_list():
+	var properties: Array[Dictionary] = []
+	properties.append({
+		"name": "groups",
+		"type": TYPE_PACKED_STRING_ARRAY,
+		"usage": PROPERTY_USAGE_NO_EDITOR,
+		"hint": PROPERTY_HINT_NONE,
+		"hint_string": ""
+	})
+	properties.append({
+		"name": "unique_nodes",
+		"type": TYPE_DICTIONARY,
+		"usage": PROPERTY_USAGE_NO_EDITOR,
+		"hint": PROPERTY_HINT_NONE,
+		"hint_string": ""
+	})
+	properties.append({
+		"name": "grouped_nodes",
+		"type": TYPE_DICTIONARY,
+		"usage": PROPERTY_USAGE_NO_EDITOR,
+		"hint": PROPERTY_HINT_NONE,
+		"hint_string": ""
+	})
+	return properties
 
 
 # UPDATE VALUES

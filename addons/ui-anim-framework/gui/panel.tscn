@@ -1,57 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://bmgwskhgh5oo4"]
+[gd_scene load_steps=10 format=3 uid="uid://djdfwar13aryf"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/panel.gd" id="1_3prwa"]
-[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/add_icon_icon.png" id="2_jslws"]
-[ext_resource type="PackedScene" uid="uid://b3rkro42ix21j" path="res://addons/ui-anim-framework/gui/popup_panel.tscn" id="3_4pbcq"]
-[ext_resource type="Texture2D" uid="uid://q400fytg18th" path="res://addons/ui-anim-framework/gui/icons/rename_icon_icon.png" id="3_mhrjn"]
-[ext_resource type="Texture2D" uid="uid://jg2sm6ncraoe" path="res://addons/ui-anim-framework/gui/icons/delete_icon_icon.png" id="4_nqpwp"]
-[ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/select_up_icon.png" id="5_l7xrh"]
-[ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/select_down_icon.png" id="6_vw566"]
+[ext_resource type="PackedScene" uid="uid://ca420jsxf3hv5" path="res://addons/ui-anim-framework/gui/components/scene_tool_interface.tscn" id="2_oomwt"]
+[ext_resource type="PackedScene" uid="uid://nh0tq54d35gh" path="res://addons/ui-anim-framework/gui/components/animations_interface.tscn" id="3_v5awg"]
+[ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/popup_panel.tscn" id="5_chn2x"]
 [ext_resource type="Texture2D" uid="uid://wawu4yd53kgs" path="res://addons/ui-anim-framework/gui/icons/settings_icon.png" id="7_f45h2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrs7e"]
-content_margin_left = 10.0
-content_margin_top = 1.0
-content_margin_right = 10.0
-content_margin_bottom = 1.0
-bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5sm3n"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kuib1"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q0kg1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwp5y"]
-bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1mym8"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sq2ue"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oc30j"]
-bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_af7cu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j0klg"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r08r1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5v04s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytgr6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4wl6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j62t6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fbdey"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1c8y"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w1oh1"]
-size = Vector2(10, 10)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oamnb"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpsfl"]
 
 [node name="UI Animation" type="Control"]
 custom_minimum_size = Vector2(0, 230)
@@ -79,421 +40,30 @@ layout_mode = 2
 theme_override_constants/side_margin = -1
 clip_tabs = false
 
-[node name="SceneToolInterface" type="MarginContainer" parent="MarginContainer/TabContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 4
-
-[node name="NoneDetectedInterface" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface"]
-unique_name_in_owner = true
+[node name="SceneToolInterface" parent="MarginContainer/TabContainer" instance=ExtResource("2_oomwt")]
 layout_mode = 2
 
-[node name="NoneDetectedTitleLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/NoneDetectedInterface"]
-layout_mode = 2
-text = "No UI Animation Node Detected"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/NoneDetectedInterface"]
-layout_mode = 2
-alignment = 1
-
-[node name="NoneDetectedCreateLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/NoneDetectedInterface/HBoxContainer"]
-layout_mode = 2
-text = "Create One?"
-
-[node name="NoneDetectedCreateButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/NoneDetectedInterface/HBoxContainer"]
-layout_mode = 2
-text = "Create
-"
-
-[node name="DetectedInterface" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface"]
-unique_name_in_owner = true
+[node name="AnimationsInterface" parent="MarginContainer/TabContainer" instance=ExtResource("3_v5awg")]
 visible = false
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface"]
-layout_mode = 2
-
-[node name="SceneToolOptions" type="OptionButton" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 0
-item_count = 3
-selected = 0
-popup/item_0/text = "Groups"
-popup/item_0/id = 0
-popup/item_1/text = "Events"
-popup/item_1/id = 1
-popup/item_2/text = "Triggers"
-popup/item_2/id = 2
-
-[node name="SceneToolGroupsInterface" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 30
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Groups" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer"]
-layout_mode = 2
-
-[node name="GroupsLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups"]
-layout_mode = 2
-text = "Groups"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="GroupsList" type="ItemList" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 110)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_qrs7e")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kuib1")
-
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="ToolsPanel" type="PanelContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwp5y")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel"]
-layout_mode = 2
-theme_override_constants/separation = 45
-alignment = 1
-
-[node name="GroupsAddButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_af7cu")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_j0klg")
-icon = ExtResource("2_jslws")
-
-[node name="GroupsRenameButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_r08r1")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
-icon = ExtResource("3_mhrjn")
-
-[node name="GroupsDeleteButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ytgr6")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wl6")
-icon = ExtResource("4_nqpwp")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer"]
-layout_mode = 2
-
-[node name="Nodes" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer"]
-layout_mode = 2
-
-[node name="NodesLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes"]
-layout_mode = 2
-text = "Nodes"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="NodesList" type="ItemList" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 110)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qrs7e")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_j62t6")
-
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="ToolsPanel" type="PanelContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwp5y")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel"]
-layout_mode = 2
-theme_override_constants/separation = 35
-alignment = 1
-
-[node name="NodesSelectUpButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_r08r1")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_fbdey")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
-icon = ExtResource("5_l7xrh")
-
-[node name="NodesSelectDownButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_r08r1")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_fbdey")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
-icon = ExtResource("6_vw566")
-
-[node name="NodesRenameButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_r08r1")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_fbdey")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
-icon = ExtResource("3_mhrjn")
-
-[node name="NodesDeleteButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ytgr6")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_r1c8y")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wl6")
-icon = ExtResource("4_nqpwp")
-
-[node name="SelectedNode" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="SelectedNodeLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/SelectedNode"]
-layout_mode = 2
-text = "SelectedNode
-"
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/SelectedNode"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/SelectedNode/PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="AddNodeButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/SelectedNode/PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-text = "+"
-
-[node name="AddNodeNameLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/SelectedNode/PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Empty"
-vertical_alignment = 1
-
-[node name="SceneToolEventsInterface" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 30
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Groups" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer"]
-layout_mode = 2
-
-[node name="GroupsLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups"]
-layout_mode = 2
-text = "Groups"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="GroupsList" type="ItemList" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer"]
-custom_minimum_size = Vector2(200, 110)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_qrs7e")
-select_mode = 1
-item_count = 6
-item_0/text = "Default"
-item_1/text = "Yes"
-item_2/text = "T"
-item_3/text = "T"
-item_4/text = "T"
-item_5/text = "T"
-
-[node name="ToolsPanel" type="PanelContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwp5y")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="GroupsAddButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_j0klg")
-icon = SubResource("PlaceholderTexture2D_w1oh1")
-
-[node name="GroupsRenameButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
-icon = SubResource("PlaceholderTexture2D_w1oh1")
-
-[node name="GroupsDeleteButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wl6")
-icon = SubResource("PlaceholderTexture2D_w1oh1")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolEventsInterface/HBoxContainer"]
-layout_mode = 2
-
-[node name="SceneToolTriggersInterface" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 30
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Nodes" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer"]
-layout_mode = 2
-
-[node name="NodesLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes"]
-layout_mode = 2
-text = "Nodes"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="GroupsList" type="ItemList" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes/VBoxContainer"]
-custom_minimum_size = Vector2(200, 110)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_qrs7e")
-select_mode = 1
-
-[node name="ToolsPanel" type="PanelContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwp5y")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="NodesDeleteButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_oamnb")
-icon = SubResource("PlaceholderTexture2D_w1oh1")
-
-[node name="SelectedNode" type="VBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="SelectedNodeLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/SelectedNode"]
-layout_mode = 2
-text = "SelectedNode
-"
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/SelectedNode"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/SelectedNode/PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="AddNodeButton" type="Button" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/SelectedNode/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-text = "+"
-
-[node name="NodeNameLabel" type="Label" parent="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolTriggersInterface/HBoxContainer/SelectedNode/PanelContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Empty"
-vertical_alignment = 1
-
-[node name="Animations" type="MarginContainer" parent="MarginContainer/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Animations"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="MarginContainer/TabContainer/Animations/VBoxContainer"]
-layout_mode = 2
-text = "Press me
-"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/margin_left = 4
 theme_override_constants/margin_bottom = 8
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5sm3n")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q0kg1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1mym8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qpsfl")
 icon = ExtResource("7_f45h2")
 
-[node name="PopupPanel" parent="." instance=ExtResource("3_4pbcq")]
+[node name="PopupPanel" parent="." instance=ExtResource("5_chn2x")]
 visible = false
 
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/NoneDetectedInterface/HBoxContainer/NoneDetectedCreateButton" to="." method="_on_none_detected_create_button_pressed"]
-[connection signal="item_selected" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolOptions" to="." method="_on_scene_tool_options_item_selected"]
-[connection signal="item_clicked" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/GroupsList" to="." method="_on_groups_list_item_clicked"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer/GroupsAddButton" to="." method="_on_groups_add_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer/GroupsRenameButton" to="." method="_on_groups_rename_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/HBoxContainer/GroupsDeleteButton" to="." method="_on_groups_delete_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer/NodesSelectUpButton" to="." method="_on_nodes_select_up_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer/NodesSelectDownButton" to="." method="_on_nodes_select_down_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer/NodesRenameButton" to="." method="_on_nodes_rename_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/Nodes/VBoxContainer/ToolsPanel/HBoxContainer/NodesDeleteButton" to="." method="_on_nodes_delete_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TabContainer/SceneToolInterface/DetectedInterface/HBoxContainer/SceneToolGroupsInterface/HBoxContainer/SelectedNode/PanelContainer/HBoxContainer/AddNodeButton" to="." method="_on_add_node_button_pressed"]
+[connection signal="repopulate" from="MarginContainer/TabContainer/SceneToolInterface" to="." method="_populate_ui"]
 [connection signal="popup_hide" from="PopupPanel" to="." method="_popup_closed"]

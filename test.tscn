@@ -4,6 +4,9 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="UIAnimationController" type="Node" parent="."]
+script = ExtResource("1_87tl7")
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Node2D2" type="Node2D" parent="."]
@@ -15,15 +18,3 @@
 [node name="Node2D5" type="Node2D" parent="."]
 
 [node name="Node2D6" type="Node2D" parent="."]
-
-[node name="UIAnimationController" type="Node" parent="."]
-script = ExtResource("1_87tl7")
-groups = PackedStringArray("sss", "tt")
-unique_nodes = {
-NodePath("Node2D5"): "Yes",
-NodePath("Node2D3"): "Node2D3"
-}
-grouped_nodes = {
-"sss": Array[NodePath]([]),
-"tt": Array[NodePath]([NodePath("Node2D5")])
-}

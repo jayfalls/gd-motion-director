@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3rkro42ix21j"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/popup_panel.gd" id="1_3jldh"]
+[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/popup_panel.gd" id="1_3jldh"]
 
 [node name="PopupPanel" type="PopupPanel"]
 initial_position = 2
