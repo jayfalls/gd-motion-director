@@ -1,16 +1,24 @@
 <p align="center">
-# Godot UI Animation Framework
+    <img src="images/logo.png"
+        height="250">
+</p>
+
 </p>
 <p align="center">
-    ![status](https://img.shields.io/badge/status-not%20functional-red)
-    ![version](https://img.shields.io/badge/version-0.4.3-brightgreen)
+    <img src="https://img.shields.io/badge/status-not%20functional-red">
+    <img src ="https://img.shields.io/badge/version-0.4.3-brightgreen">
 </p>
-An easy to work with, modular, extendable framework for animating all the UI and other things in your project.
 
-# Vision
-I am building a framework to make animating both large and small chunks of UI as easy and effective as possible. By using a modular building block approach, with as much automation to create a low/no-code end-user experience, I hope to solve this challenge.
+A plugin for Godot to make animating both large and small chunks of UI as easy and effective as possible. 
 
-# Dependencies & Contributions
+# PROJECT IS CURRENTLY NOT FUNCTIONAL
+
+# Features
+- Manage everything from one GUI panel
+- Combine [GDActions](https://github.com/duongvituan/godot-action-animation-framework) and shader effects in unlimited ways
+- No Code
+
+# 🥰 Credits
 A huge shout-out to the projects who were generous enough to release their code under MIT License as to allow me to use and take inspiration for my project.
 ## Dependencies
 [GD-Action](https://github.com/duongvituan/godot-action-animation-framework)
