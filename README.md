@@ -1,5 +1,10 @@
+<p align="center">
 # Godot UI Animation Framework
-
+</p>
+<p align="center">
+    <a <img src="images/version.svg" width="600"</a>
+    <a <img src="images/status.svg" width="600"</a>
+</p>
 An easy to work with, modular, extendable framework for animating all the UI and other things in your project.
 
 # Vision
