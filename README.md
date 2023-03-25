@@ -2,8 +2,8 @@
 # Godot UI Animation Framework
 </p>
 <p align="center">
-    <a <img src="images/version.svg" width="600"</a>
-    <a <img src="images/status.svg" width="600"</a>
+    ![status](https://img.shields.io/badge/status-not%20functional-red)
+    ![version](https://img.shields.io/badge/version-0.4.3-brightgreen)
 </p>
 An easy to work with, modular, extendable framework for animating all the UI and other things in your project.
 
