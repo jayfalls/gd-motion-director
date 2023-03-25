@@ -2,6 +2,9 @@
 extends UIAnimationInterface
 
 
+signal settings_updated
+
+
 # VARIABLES
 ## Children
 @onready var file_dialog: FileDialog = $FileDialog
@@ -29,6 +32,9 @@ const options_interfaces: PackedStringArray = [
 	"about_interface"
 ]
 
+## Values
+var has_settings_update: bool = false
+
 
 ## Temp Values
 var options_index: int = 0
@@ -36,8 +42,7 @@ var animation_folder_list_index: int
 
 
 # INITIALISATION
-func _ready():
-	load_settings()
+func _ready_inject() -> void:
 	settings_options.select(options_index)
 	interface_toggle(options_interfaces, 0)
 	_populate_about()
@@ -54,8 +59,10 @@ func _populate_about() -> void:
 
 # SETTINGS
 func save_settings() -> void:
-	if settings.has_changed:
+	if has_settings_update:
 		ResourceSaver.save(settings, settings.save_path)
+		has_settings_update = false
+		settings_updated.emit()
 
 
 # SHOW/HIDE
@@ -128,10 +135,13 @@ func _on_settings_options_list_item_clicked(index, _at_position, _mouse_button_i
 
 ## Animations
 func _add_animation_folder(folder: String) -> void:
+	if folder == "res://":
+		return
 	folder += "/"
 	if folder in settings.animation_folders:
 		return
 	settings.animation_folders.append(folder)
+	has_settings_update = true
 	save_settings()
 	update()
 
@@ -140,6 +150,7 @@ func _delete_animation_folder() -> void:
 	var delete_index: int = settings.animation_folders.find("res://" + folder)
 	settings.animation_folders.remove_at(delete_index)
 	_switch_list_selection(animation_folders_list, "animation_folder_list_index", true)
+	has_settings_update = true
 	save_settings()
 	update()
 
@@ -151,7 +162,8 @@ func _on_animation_folders_select_down_button_pressed():
 
 func _on_animation_folders_add_button_pressed():
 	file_dialog.show()
-	file_dialog.dir_selected.connect(_add_animation_folder)
+	if not file_dialog.dir_selected.is_connected(_add_animation_folder):
+		file_dialog.dir_selected.connect(_add_animation_folder)
 
 func _on_animation_folders_delete_button_pressed():
 	var description: String = "Are you sure you want to remove this frolder from the animation folders?"

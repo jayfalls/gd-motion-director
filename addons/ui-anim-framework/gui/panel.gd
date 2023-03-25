@@ -43,6 +43,9 @@ func _prepare_interfaces() -> void:
 	# Scene Tool Interface
 	scene_tool_interface.main_panel = self
 	scene_tool_interface.interface = interface
+	
+	# Animations Interface
+	animations_interface.main_panel = self
 
 
 # POPULATE/UPDATE UI
@@ -50,23 +53,20 @@ func _editor_scene_changed(node: Node):
 	update_ui()
 
 func update_ui() -> void:
+	scene_tool_interface.update()
+	animations_interface.update()
 	if settings_button.is_exit:
 		settings_interface.update()
-		return
-	match tab_container.current_tab:
-		tabs.SCENE_TOOL:
-			scene_tool_interface.update()
-		tabs.ANIMATIONS:
-			animations_interface.update()
+	
 
 func _toggle_settings() -> void:
-	settings_interface.update()
 	if settings_button.is_exit:
 		tab_container.show()
 		settings_interface.settings_exit()
 	else:
 		tab_container.hide()
 		settings_interface.settings_show()
+	update_ui()
 
 
 # POPUPS
@@ -88,3 +88,15 @@ func yes_no_popup(call: Callable, description: String) -> void:
 	popup_callable = call
 	popup_panel.yn_confirmed.connect(popup_callable, CONNECT_PERSIST)
 	popup_panel.yes_no_popup_show(description)
+
+
+# SETTINGS
+func _on_settings_interface_settings_updated():
+	animations_interface.load_settings()
+
+
+# UI INTERACTION
+func _on_tab_container_tab_changed(_tab):
+	# Ensure that the tab refreshes properly
+	await get_tree().create_timer(0.01).timeout
+	update_ui()

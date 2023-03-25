@@ -63,6 +63,8 @@ func _populate_interface() -> void:
 	# Check if scene tool can and needs to be repopulated
 	if not _has_controller():
 		return
+	if not visible:
+		return
 	
 	match selected_scene_tool.selected:
 		0:

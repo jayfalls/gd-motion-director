@@ -73,5 +73,7 @@ script = ExtResource("6_n0vm4")
 [node name="PopupPanel" parent="." instance=ExtResource("5_chn2x")]
 visible = false
 
+[connection signal="tab_changed" from="MarginContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="settings_updated" from="MarginContainer/SettingsInterface" to="." method="_on_settings_interface_settings_updated"]
 [connection signal="settings_toggle" from="MarginContainer/MarginContainer/SettingsButton" to="." method="_toggle_settings"]
 [connection signal="popup_hide" from="PopupPanel" to="." method="_popup_closed"]
