@@ -202,8 +202,8 @@ func _has_controller() -> bool:
 func _editor_path_to_run_path(path: NodePath) -> NodePath:
 	var path_string: String = path
 	var root_name: String = edited_scene_root.name
-	var editor_path_index: int = path_string.find(root_name)
-	path_string = path_string.substr(editor_path_index)
+	var edit_index: int = path_string.find(root_name)
+	path_string = path_string.substr(edit_index)
 	if edited_scene_root.name + "/" in path_string:
 		path_string = path_string.replace(root_name + "/","")
 	else:
@@ -234,29 +234,29 @@ func _on_none_detected_create_button_pressed():
 	edited_scene_root.add_child(node)
 	node.set_owner(edited_scene_root)
 	
-	repopulate.emit()
+	update()
 
 ## Detected Interface
 func _on_scene_tool_options_item_selected(index):
 	interface_toggle(scene_tool_options_interfaces, index)
-	repopulate.emit()
+	update()
 
 ### Groups Interface
 #### Groups List
 func _add_group(text: String) -> void:
 	controller.groups.append(text)
-	repopulate.emit()
+	update()
 
 func _rename_group(text: String) -> void:
 	controller.rename_group(selected_group, text)
-	repopulate.emit()
+	update()
 
 func _delete_group() -> void:
 	controller.remove_group(selected_group)
-	repopulate.emit()
+	update()
 
 func _on_groups_list_item_clicked(_index, _at_position, _mouse_button_index):
-	repopulate.emit()
+	update()
 
 func _on_groups_add_button_pressed():
 	var description: String = "Add a Group"
@@ -271,38 +271,21 @@ func _on_groups_delete_button_pressed():
 	main_panel.yes_no_popup(self._delete_group, description)
 
 #### Nodes List
-func _switch_nodes_selection(previous: bool = false) -> void:
-	if not nodes_list.is_anything_selected():
-		node_list_index = -1
-	
-	if previous:
-		if node_list_index <= 0:
-			node_list_index = nodes_list.item_count - 1
-		else:
-			node_list_index -= 1
-	else:
-		if node_list_index >= nodes_list.item_count - 1:
-			node_list_index = 0
-		else:
-			node_list_index += 1
-	
-	nodes_list.select(node_list_index)
-	_update_interface()
-
 func _rename_node(text: String) -> void:
 	controller.rename_node(selected_group_nodes[node_list_index], text)
-	repopulate.emit()
+	update()
 
 func _delete_node() -> void:
 	selected_group_nodes.pop_at(node_list_index)
 	controller.grouped_nodes[selected_group] = selected_group_nodes.duplicate()
-	repopulate.emit()
+	_switch_list_selection(nodes_list, "node_list_index", true)
+	update()
 
 func _on_nodes_select_up_button_pressed():
-	_switch_nodes_selection(true)
+	_switch_list_selection(nodes_list, "node_list_index", true)
 
 func _on_nodes_select_down_button_pressed():
-	_switch_nodes_selection()
+	_switch_list_selection(nodes_list, "node_list_index")
 
 func _on_nodes_rename_button_pressed():
 	var description: String = "Choose a New Name for the " + str(selected_group_nodes[node_list_index]) + " Node"
@@ -319,4 +302,4 @@ func _on_add_node_button_pressed():
 	if not selected_node_path in controller.unique_nodes.keys():
 		controller.unique_nodes[selected_node_path] = selected_name
 	
-	repopulate.emit()
+	update()

@@ -28,14 +28,17 @@ var popup_callable: Callable
 # INITIALISATION
 func _ready():
 	_prepare_interfaces()
-	_update_ui()
-	interface.selection_changed.connect(_update_ui)
+	update_ui()
+	interface.selection_changed.connect(update_ui)
 
 func _prepare_interfaces() -> void:
 	tab_container.show()
 	settings_interface.hide()
+	
 	# Settings Interface
-	settings_button.settings_toggle.connect(_toggle_settings, CONNECT_PERSIST)
+	if not settings_button.settings_toggle.is_connected(_toggle_settings):
+		settings_button.settings_toggle.connect(_toggle_settings, CONNECT_PERSIST)
+	settings_interface.main_panel = self
 	
 	# Scene Tool Interface
 	scene_tool_interface.main_panel = self
@@ -43,20 +46,27 @@ func _prepare_interfaces() -> void:
 
 
 # POPULATE/UPDATE UI
-func _update_ui() -> void:
+func _editor_scene_changed(node: Node):
+	update_ui()
+
+func update_ui() -> void:
+	if settings_button.is_exit:
+		settings_interface.update()
+		return
 	match tab_container.current_tab:
 		tabs.SCENE_TOOL:
-			scene_tool_interface.update_ui()
+			scene_tool_interface.update()
 		tabs.ANIMATIONS:
-			animations_interface.update_ui()
+			animations_interface.update()
 
 func _toggle_settings() -> void:
+	settings_interface.update()
 	if settings_button.is_exit:
 		tab_container.show()
-		settings_interface.hide()
+		settings_interface.settings_exit()
 	else:
 		tab_container.hide()
-		settings_interface.show()
+		settings_interface.settings_show()
 
 
 # POPUPS
@@ -66,7 +76,7 @@ func _popup_closed() -> void:
 	elif popup_panel.yn_confirmed.is_connected(popup_callable):
 		popup_panel.yn_confirmed.disconnect(popup_callable)
 	
-	_update_ui()
+	update_ui()
 
 func line_edit_popup(call: Callable, description: String, invalid_texts: PackedStringArray = [""]) -> void:
 	popup_panel.invalid_texts = invalid_texts

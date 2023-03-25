@@ -20,15 +20,21 @@
 script = ExtResource("1_87tl7")
 groups = PackedStringArray("sha")
 unique_nodes = {
-NodePath("UIAnimationController"): "UIAnimationController"
+NodePath("UIAnimationController"): "UIAnimationController",
+NodePath("Node2D"): "Node2D",
+NodePath("Node2D4"): "Node2D4"
 }
 grouped_nodes = {
-"": Array[NodePath]([NodePath("UIAnimationController")])
+"": Array[NodePath]([NodePath("UIAnimationController")]),
+"sha": Array[NodePath]([NodePath("Node2D"), NodePath("Node2D4")])
 }
 groups = PackedStringArray("sha")
 unique_nodes = {
-NodePath("UIAnimationController"): "UIAnimationController"
+NodePath("UIAnimationController"): "UIAnimationController",
+NodePath("Node2D"): "Node2D",
+NodePath("Node2D4"): "Node2D4"
 }
 grouped_nodes = {
-"": Array[NodePath]([NodePath("UIAnimationController")])
+"": Array[NodePath]([NodePath("UIAnimationController")]),
+"sha": Array[NodePath]([NodePath("Node2D"), NodePath("Node2D4")])
 }

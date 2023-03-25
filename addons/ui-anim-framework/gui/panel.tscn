@@ -17,6 +17,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpsfl"]
 
 [node name="UI Animation" type="Control"]
+clip_contents = true
 custom_minimum_size = Vector2(0, 230)
 layout_mode = 3
 anchors_preset = 5
@@ -38,7 +39,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/side_margin = -1
 clip_tabs = false
@@ -51,6 +51,7 @@ visible = false
 layout_mode = 2
 
 [node name="SettingsInterface" parent="MarginContainer" instance=ExtResource("4_in8wj")]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
@@ -72,6 +73,5 @@ script = ExtResource("6_n0vm4")
 [node name="PopupPanel" parent="." instance=ExtResource("5_chn2x")]
 visible = false
 
-[connection signal="repopulate" from="MarginContainer/TabContainer/SceneToolInterface" to="." method="_update_ui"]
-[connection signal="repopulate" from="MarginContainer/TabContainer/AnimationsInterface" to="." method="_update_ui"]
+[connection signal="settings_toggle" from="MarginContainer/MarginContainer/SettingsButton" to="." method="_toggle_settings"]
 [connection signal="popup_hide" from="PopupPanel" to="." method="_popup_closed"]
