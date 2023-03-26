@@ -4,6 +4,7 @@ class_name UIAnimationPanel extends Control
 
 # VARIABLES
 ## References
+var editor_file_system: EditorFileSystem
 var interface: EditorSelection
 
 ## Children
@@ -47,10 +48,10 @@ func _prepare_interfaces() -> void:
 	# Animations Interface
 	animations_interface.main_panel = self
 
-func assign_settings_filesystem(file_system: EditorFileSystem) -> void:
-	settings_interface.editor_file_system = file_system
-
 # POPULATE/UPDATE UI
+func _refresh_files() -> void:
+	editor_file_system.scan()
+
 func _editor_scene_changed(node: Node):
 	update_ui()
 

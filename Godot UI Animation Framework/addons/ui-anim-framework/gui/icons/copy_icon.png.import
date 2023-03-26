@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q400fytg18th"
-path="res://.godot/imported/rename_icon_icon.png-e789c60049b489b676e8c737dad9a601.ctex"
+uid="uid://b2e28m051dfun"
+path="res://.godot/imported/copy_icon.png-e497d0109026bf0308a43070c2cffa9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ui-anim-framework/gui/icons/rename_icon_icon.png"
-dest_files=["res://.godot/imported/rename_icon_icon.png-e789c60049b489b676e8c737dad9a601.ctex"]
+source_file="res://addons/ui-anim-framework/gui/icons/copy_icon.png"
+dest_files=["res://.godot/imported/copy_icon.png-e497d0109026bf0308a43070c2cffa9a.ctex"]
 
 [params]
 

@@ -6,9 +6,6 @@ signal settings_updated
 
 
 # VARIABLES
-## References
-var editor_file_system: EditorFileSystem
-
 ## Children
 @onready var file_dialog: FileDialog = $FileDialog
 @onready var settings_options: ItemList = $%SettingsOptionsList
@@ -93,8 +90,21 @@ func _populate_interface() -> void:
 func _populate_animations() -> void:
 	animation_folders_list.clear()
 	animation_folders_list.add_item(_get_rootless_path(settings.default_animation_folder))
+	var error_dir: DirAccess
+	var error_dirs: PackedInt32Array
 	for anim_folder in settings.animation_folders:
-		animation_folders_list.add_item(_get_rootless_path(anim_folder))
+		error_dir = DirAccess.open(anim_folder)
+		if error_dir:
+			animation_folders_list.add_item(_get_rootless_path(anim_folder))
+		else:
+			var remove_index: int = settings.animation_folders.find(anim_folder)
+			error_dirs.append(remove_index)
+	
+	# Remove any no longer existing directories
+	for error in error_dirs:
+		settings.animation_folders.remove_at(error)
+	has_settings_update = true
+	save_settings()
 
 
 # UI UPDATES
@@ -115,7 +125,8 @@ func _update_animations() -> void:
 	animation_folders_delete_button.disabled = true
 	if not animation_folders_list.is_anything_selected():
 		animation_folder_list_index = 0
-		animation_folders_list.select(animation_folder_list_index)
+		if not animation_folder_list_index > animation_folders_list.item_count - 1:
+			animation_folders_list.select(animation_folder_list_index)
 	if animation_folder_list_index > 0:
 		animation_folders_delete_button.disabled = false
 	if animation_folders_list.item_count > 1:
@@ -124,9 +135,6 @@ func _update_animations() -> void:
 
 
 # FILE INFORMATION
-func _refresh_files() -> void:
-	editor_file_system.scan()
-
 func _get_rootless_path(path: String) -> String:
 	var edit_index: int = 6
 	path = path.substr(edit_index)
@@ -141,7 +149,7 @@ func _on_settings_options_list_item_clicked(index, _at_position, _mouse_button_i
 
 ## Animations
 func _add_animation_folder(folder: String) -> void:
-	_refresh_files()
+	main_panel._refresh_files()
 	if folder == "res://":
 		return
 	folder += "/"
@@ -168,9 +176,10 @@ func _on_animation_folders_select_down_button_pressed():
 	_switch_list_selection(animation_folders_list, "animation_folder_list_index")
 
 func _on_animation_folders_add_button_pressed():
+	file_dialog.current_dir = "res://"
 	file_dialog.show()
-	if not file_dialog.canceled.is_connected(_refresh_files):
-		file_dialog.canceled.connect(_refresh_files, CONNECT_PERSIST)
+	if not file_dialog.canceled.is_connected(main_panel._refresh_files):
+		file_dialog.canceled.connect(main_panel._refresh_files, CONNECT_PERSIST)
 	if not file_dialog.dir_selected.is_connected(_add_animation_folder):
 		file_dialog.dir_selected.connect(_add_animation_folder, CONNECT_PERSIST)
 

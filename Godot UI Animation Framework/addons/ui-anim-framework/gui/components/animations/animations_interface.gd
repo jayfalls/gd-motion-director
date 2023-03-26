@@ -12,6 +12,8 @@ extends UIAnimationInterface
 func _ready_inject() -> void:
 	file_explorer.animation_creator = animation_creator
 	animation_creator.file_explorer = file_explorer
+	await get_tree().process_frame
+	file_explorer.main_panel = main_panel
 
 
 # POPULATE UI

@@ -1,12 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://w0sg5uafa3wp"]
+[gd_scene load_steps=20 format=3 uid="uid://c4nki6lj7h3j8"]
 
-[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/add_icon_icon.png" id="1_7ct6t"]
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animations_file_explorer.gd" id="1_lpdgh"]
 [ext_resource type="Texture2D" uid="uid://0rqjg1weco5m" path="res://addons/ui-anim-framework/gui/icons/folder_icon.png" id="2_8v1p0"]
-[ext_resource type="Texture2D" uid="uid://q400fytg18th" path="res://addons/ui-anim-framework/gui/icons/rename_icon_icon.png" id="3_wusma"]
-[ext_resource type="Texture2D" uid="uid://jg2sm6ncraoe" path="res://addons/ui-anim-framework/gui/icons/delete_icon_icon.png" id="4_u5yoi"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ekd"]
+[ext_resource type="Texture2D" uid="uid://c1kjnpdrpbdco" path="res://addons/ui-anim-framework/gui/icons/expand_all_icon.png" id="2_g8aer"]
+[ext_resource type="Texture2D" uid="uid://dfiisgykye01b" path="res://addons/ui-anim-framework/gui/icons/refresh_icon.png" id="2_pl52r"]
+[ext_resource type="Texture2D" uid="uid://gwlr2jrr72ag" path="res://addons/ui-anim-framework/gui/icons/return_to_icon.png" id="2_q1hb0"]
+[ext_resource type="Texture2D" uid="uid://bl7ethgts3kda" path="res://addons/ui-anim-framework/gui/icons/collapse_all_icon.png" id="3_u62xi"]
+[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/add_icon.png" id="6_x7dvm"]
+[ext_resource type="Texture2D" uid="uid://b2e28m051dfun" path="res://addons/ui-anim-framework/gui/icons/copy_icon.png" id="7_un4cw"]
+[ext_resource type="Texture2D" uid="uid://doq3xuydq8hch" path="res://addons/ui-anim-framework/gui/icons/rename_icon.png" id="8_dchnx"]
+[ext_resource type="Texture2D" uid="uid://crum57628e78v" path="res://addons/ui-anim-framework/gui/icons/cut_icon.png" id="8_n0gtp"]
+[ext_resource type="Texture2D" uid="uid://cx088m8x6loav" path="res://addons/ui-anim-framework/gui/icons/delete_icon.png" id="9_fhm6a"]
+[ext_resource type="Texture2D" uid="uid://bcw8wdv4whxr5" path="res://addons/ui-anim-framework/gui/icons/paste_icon.png" id="9_mak31"]
+[ext_resource type="Texture2D" uid="uid://cl2mbi8d2jjr0" path="res://addons/ui-anim-framework/gui/icons/cancel_icon.png" id="11_lkb4h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sipbg"]
 
@@ -18,18 +24,72 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0k382"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ekd"]
+
 [node name="FileExplorer" type="MarginContainer"]
 theme_override_constants/margin_left = 4
 script = ExtResource("1_lpdgh")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(150, 120)
 layout_mode = 2
 
-[node name="FilesLabel" type="Label" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FilesLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Files"
 vertical_alignment = 1
+
+[node name="ExpandSeparator" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ExpandAllButton" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("2_g8aer")
+
+[node name="CollapseAllButton" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("3_u62xi")
+
+[node name="FileReturnToButton" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("2_q1hb0")
+
+[node name="FileRefreshButton" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("2_pl52r")
 
 [node name="FileExplorerTree" type="Tree" parent="VBoxContainer"]
 unique_name_in_owner = true
@@ -37,23 +97,23 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h5ekd")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="Seperator" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="Seperator" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="FileAddButton" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="FileAddButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -62,9 +122,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
-icon = ExtResource("1_7ct6t")
+icon = ExtResource("6_x7dvm")
 
-[node name="FileAddFolderButton" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="FileAddFolderButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -75,7 +135,15 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
 icon = ExtResource("2_8v1p0")
 
-[node name="FileRenameButton" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="FileCopyCutButtons" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileCopyCutButtons"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FileCopyButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileCopyCutButtons/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -84,9 +152,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
-icon = ExtResource("3_wusma")
+icon = ExtResource("7_un4cw")
 
-[node name="FileDeleteButton" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="FileCutButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileCopyCutButtons/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -95,6 +163,71 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
-icon = ExtResource("4_u5yoi")
+icon = ExtResource("8_n0gtp")
 
+[node name="FilePasteCancelButtons" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FilePasteCancelButtons"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilePasteButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FilePasteCancelButtons/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("9_mak31")
+
+[node name="FileCancelButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FilePasteCancelButtons/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("11_lkb4h")
+
+[node name="FileRenameButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("8_dchnx")
+
+[node name="FileDeleteButton" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sipbg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iks6r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doqib")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qg7np")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0k382")
+icon = ExtResource("9_fhm6a")
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/ExpandAllButton" to="." method="_on_expand_all_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/CollapseAllButton" to="." method="_on_collapse_all_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/FileReturnToButton" to="." method="_on_file_return_to_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/FileRefreshButton" to="." method="_on_file_refresh_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/FileExplorerTree" to="." method="_on_file_explorer_tree_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileAddButton" to="." method="_on_file_add_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileAddFolderButton" to="." method="_on_file_add_folder_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileCopyCutButtons/HBoxContainer/FileCopyButton" to="." method="_on_file_copy_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileCopyCutButtons/HBoxContainer/FileCutButton" to="." method="_on_file_cut_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FilePasteCancelButtons/HBoxContainer/FilePasteButton" to="." method="_on_file_paste_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FilePasteCancelButtons/HBoxContainer/FileCancelButton" to="." method="_on_file_cancel_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileRenameButton" to="." method="_on_file_rename_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/FileDeleteButton" to="." method="_on_file_delete_button_pressed"]
