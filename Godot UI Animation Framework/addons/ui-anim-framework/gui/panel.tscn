@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://djdfwar13aryf"]
+[gd_scene load_steps=12 format=3 uid="uid://c6s87hky2d8xg"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/panel.gd" id="1_3prwa"]
-[ext_resource type="PackedScene" uid="uid://ca420jsxf3hv5" path="res://addons/ui-anim-framework/gui/components/scene_tool_interface.tscn" id="2_oomwt"]
-[ext_resource type="PackedScene" uid="uid://nh0tq54d35gh" path="res://addons/ui-anim-framework/gui/components/animations_interface.tscn" id="3_v5awg"]
-[ext_resource type="PackedScene" uid="uid://b16aqq6b60d2f" path="res://addons/ui-anim-framework/gui/components/settings_interface.tscn" id="4_in8wj"]
+[ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/scene_tool/scene_tool_interface.tscn" id="2_oomwt"]
+[ext_resource type="PackedScene" uid="uid://hyumihdqymhl" path="res://addons/ui-anim-framework/gui/components/animations/animations_interface.tscn" id="3_v5awg"]
+[ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/settings/settings_interface.tscn" id="4_in8wj"]
 [ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/popup_panel.tscn" id="5_chn2x"]
-[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/settings_button.gd" id="6_n0vm4"]
+[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/settings/settings_button.gd" id="6_n0vm4"]
 [ext_resource type="Texture2D" uid="uid://wawu4yd53kgs" path="res://addons/ui-anim-framework/gui/icons/settings_icon.png" id="7_f45h2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5sm3n"]

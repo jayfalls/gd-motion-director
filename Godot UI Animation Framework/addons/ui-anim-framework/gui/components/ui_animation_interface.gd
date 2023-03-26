@@ -3,14 +3,12 @@ class_name UIAnimationInterface extends MarginContainer
 
 
 # VARIABLES
-## Constants
-const cache_directory: String = "res://addons/ui-anim-framework/data/cache/"
 ## File Access
-@onready var editor_dir: DirAccess = DirAccess.open("res://")
+@onready var editor_dir := DirAccess.open("res://")
 
 ## References
-@onready var settings: UIAnimationSettings
-@onready var main_panel: UIAnimationPanel
+var settings: UIAnimationSettings
+var main_panel: UIAnimationPanel
 
 
 # INITIALISATION
@@ -20,7 +18,6 @@ func _ready():
 
 func _ready_inject() -> void:
 	pass
-	
 
 # SETTINGS
 func load_settings() -> void:

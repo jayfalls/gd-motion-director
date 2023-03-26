@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b23d61k0qabq0"]
+
+[ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animation_creator.gd" id="1_asyqv"]
+
+[node name="AnimationCreator" type="MarginContainer"]
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_asyqv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="CurrentSelectedTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Currently Selected Animation: "
+
+[node name="CurrentSelectedLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.886275, 0.576471, 0, 1)
+text = "None"
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnimationTree" type="Tree" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+allow_reselect = true

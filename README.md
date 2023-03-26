@@ -11,8 +11,6 @@
 
 A plugin for Godot to make animating both large and small chunks of UI as easy and effective as possible. 
 
-# PROJECT IS CURRENTLY NOT FUNCTIONAL
-
 # Features
 - Manage everything from one GUI panel
 - Combine [GDActions](https://github.com/duongvituan/godot-action-animation-framework) and shader effects in unlimited ways
@@ -20,9 +18,9 @@ A plugin for Godot to make animating both large and small chunks of UI as easy a
 
 # 🥰 Credits
 A huge shout-out to the projects who were generous enough to release their code under MIT License as to allow me to use and take inspiration for my project.
-## Dependencies
+### Dependencies
 [GD-Action](https://github.com/duongvituan/godot-action-animation-framework)
 All the animations are handled by this awesome plugin.
-## Contributions
+### Contributions
 [Godot Awesome Splash](https://github.com/duongvituan/godot-awesome-splash)
 This project was the inspiration for what I've built. As well as helping me discover GDAction, I also took some shaders from here.

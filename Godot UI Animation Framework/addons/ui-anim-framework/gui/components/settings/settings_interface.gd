@@ -6,6 +6,9 @@ signal settings_updated
 
 
 # VARIABLES
+## References
+var editor_file_system: EditorFileSystem
+
 ## Children
 @onready var file_dialog: FileDialog = $FileDialog
 @onready var settings_options: ItemList = $%SettingsOptionsList
@@ -121,6 +124,9 @@ func _update_animations() -> void:
 
 
 # FILE INFORMATION
+func _refresh_files() -> void:
+	editor_file_system.scan()
+
 func _get_rootless_path(path: String) -> String:
 	var edit_index: int = 6
 	path = path.substr(edit_index)
@@ -135,6 +141,7 @@ func _on_settings_options_list_item_clicked(index, _at_position, _mouse_button_i
 
 ## Animations
 func _add_animation_folder(folder: String) -> void:
+	_refresh_files()
 	if folder == "res://":
 		return
 	folder += "/"
@@ -162,8 +169,10 @@ func _on_animation_folders_select_down_button_pressed():
 
 func _on_animation_folders_add_button_pressed():
 	file_dialog.show()
+	if not file_dialog.canceled.is_connected(_refresh_files):
+		file_dialog.canceled.connect(_refresh_files, CONNECT_PERSIST)
 	if not file_dialog.dir_selected.is_connected(_add_animation_folder):
-		file_dialog.dir_selected.connect(_add_animation_folder)
+		file_dialog.dir_selected.connect(_add_animation_folder, CONNECT_PERSIST)
 
 func _on_animation_folders_delete_button_pressed():
 	var description: String = "Are you sure you want to remove this frolder from the animation folders?"
