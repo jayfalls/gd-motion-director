@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b23d61k0qabq0"]
+[gd_scene load_steps=6 format=3 uid="uid://b23d61k0qabq0"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animation_creator.gd" id="1_asyqv"]
+[ext_resource type="PackedScene" uid="uid://bp8oqgph1ih14" path="res://addons/ui-anim-framework/gui/components/animations/sub_components/ease_curve_visualiser.tscn" id="2_8hb1o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t6sdy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h7r3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e543f"]
 
 [node name="AnimationCreator" type="MarginContainer"]
 theme_override_constants/margin_bottom = 4
@@ -28,10 +35,131 @@ text = "None"
 vertical_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 8
 
 [node name="AnimationTree" type="Tree" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 allow_reselect = true
+
+[node name="AnimationTools" type="TabContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+clip_tabs = false
+
+[node name="AnimationTools" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools"]
+layout_mode = 2
+
+[node name="Ease" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="EaseCurveVisualiser" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer" instance=ExtResource("2_8hb1o")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="EasingEnabledCheck" type="CheckBox" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t6sdy")
+text = "Easing"
+
+[node name="EasingControls" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="EasingValueTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls"]
+layout_mode = 2
+text = "Easing Value"
+
+[node name="EasingValueSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = -5.0
+max_value = 5.0
+step = 0.2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="EasingPresetsLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls/HBoxContainer2"]
+layout_mode = 2
+text = "Presets"
+
+[node name="EasingPresetsButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4h7r3")
+item_count = 10
+selected = 0
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "EaseInSine"
+popup/item_1/id = 1
+popup/item_2/text = "EaseOutSine"
+popup/item_2/id = 2
+popup/item_3/text = "EaseInOutSine"
+popup/item_3/id = 3
+popup/item_4/text = "EaseInCubic"
+popup/item_4/id = 4
+popup/item_5/text = "EaseOutCubic"
+popup/item_5/id = 5
+popup/item_6/text = "EaseInOutCubic"
+popup/item_6/id = 6
+popup/item_7/text = "EaseInQuint"
+popup/item_7/id = 7
+popup/item_8/text = "EaseOutQuint"
+popup/item_8/id = 8
+popup/item_9/text = "EaseInOutQuint"
+popup/item_9/id = 9
+
+[node name="Settings" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Settings"]
+layout_mode = 2
+
+[node name="AnimationTypeLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Settings/VBoxContainer"]
+layout_mode = 2
+text = "AnimationChainingType
+"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e543f")
+item_count = 4
+selected = 1
+popup/item_0/text = "Group"
+popup/item_0/id = 0
+popup/item_1/text = "Sequence"
+popup/item_1/id = 1
+popup/item_2/text = "Repeat"
+popup/item_2/id = 2
+popup/item_3/text = "Repeat Forever"
+popup/item_3/id = 3
+
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingEnabledCheck" to="." method="_on_easing_enabled_check_toggled"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls/EasingValueSlider" to="." method="_on_easing_value_slider_value_changed"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/HBoxContainer2/AnimationTools/Ease/HBoxContainer/VBoxContainer/EasingControls/HBoxContainer2/EasingPresetsButton" to="." method="_on_easing_presets_button_item_selected"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://c6s87hky2d8xg"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/panel.gd" id="1_3prwa"]
-[ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/scene_tool/scene_tool_interface.tscn" id="2_oomwt"]
-[ext_resource type="PackedScene" uid="uid://hyumihdqymhl" path="res://addons/ui-anim-framework/gui/components/animations/animations_interface.tscn" id="3_v5awg"]
-[ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/settings/settings_interface.tscn" id="4_in8wj"]
+[ext_resource type="PackedScene" uid="uid://co58s2qlh7fe7" path="res://addons/ui-anim-framework/gui/components/scene_tool/scene_tool_interface.tscn" id="2_oomwt"]
+[ext_resource type="PackedScene" uid="uid://hyumihdqymhl" path="res://addons/ui-anim-framework/gui/components/animations/animations_interface.tscn" id="3_gldxd"]
+[ext_resource type="PackedScene" uid="uid://blva3vfd1y7l8" path="res://addons/ui-anim-framework/gui/components/settings/settings_interface.tscn" id="4_in8wj"]
 [ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/popup_panel.tscn" id="5_chn2x"]
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/settings/settings_button.gd" id="6_n0vm4"]
 [ext_resource type="Texture2D" uid="uid://wawu4yd53kgs" path="res://addons/ui-anim-framework/gui/icons/settings_icon.png" id="7_f45h2"]
@@ -18,7 +18,7 @@
 
 [node name="UI Animation" type="Control"]
 clip_contents = true
-custom_minimum_size = Vector2(0, 230)
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -46,7 +46,7 @@ clip_tabs = false
 [node name="SceneToolInterface" parent="MarginContainer/TabContainer" instance=ExtResource("2_oomwt")]
 layout_mode = 2
 
-[node name="AnimationsInterface" parent="MarginContainer/TabContainer" instance=ExtResource("3_v5awg")]
+[node name="AnimationsInterface" parent="MarginContainer/TabContainer" instance=ExtResource("3_gldxd")]
 visible = false
 layout_mode = 2
 

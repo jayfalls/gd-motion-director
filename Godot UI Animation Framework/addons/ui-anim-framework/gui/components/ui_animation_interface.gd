@@ -2,6 +2,9 @@
 class_name UIAnimationInterface extends MarginContainer
 
 
+signal populated
+
+
 # VARIABLES
 ## File Access
 @onready var editor_dir := DirAccess.open("res://")
@@ -9,6 +12,9 @@ class_name UIAnimationInterface extends MarginContainer
 ## References
 var settings: UIAnimationSettings
 var main_panel: UIAnimationPanel
+
+## Temp Values
+var populating: bool = false
 
 
 # INITIALISATION

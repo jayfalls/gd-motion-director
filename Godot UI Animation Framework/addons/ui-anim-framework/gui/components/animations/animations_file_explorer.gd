@@ -2,9 +2,6 @@
 extends UIAnimationInterface
 
 
-signal populated
-
-
 # VARIABLES
 ## File Access
 @onready var file_access_directory: DirAccess
@@ -53,7 +50,6 @@ var file_explorer_files: Dictionary
 ### Temp Values
 #### Status
 var has_new_files: bool = true
-var populating: bool = false
 #### Information
 var selected_file: TreeItem
 var selected_file_type: int
@@ -451,7 +447,6 @@ func _paste_item(name: String) -> void:
 	else:
 		paste_path = _get_parent_folder(paste_path) + name
 	
-	print(paste_path)
 	if is_moving_file:
 		file_access_directory.rename_absolute(copy_path,paste_path)
 	else:
@@ -476,24 +471,27 @@ func _rename_file(name: String, parent_dir: String = "") -> void:
 	else:
 		new_name += "/"
 	file_access_directory.rename_absolute(old_name, new_name)
+	selected_anim = new_name
+	selected_anim_name = name.capitalize()
 	_new_files()
 	await populated
 	if type == FILE_TYPES.ANIM_FILE:
-		selected_anim = new_name
 		_return_to_selected_item()
 	else:
 		_explorer_select_folder(new_name)
 
 func _delete_file() -> void:
 	var delete_path: String = file_explorer_all_files.find_key(selected_file)
+	var parent_path: String = _get_parent_folder(delete_path)
+	print(parent_path)
 	OS.move_to_trash(ProjectSettings.globalize_path(delete_path))
 	_new_files()
 	await populated
 	if selected_anim in file_explorer_files.keys():
-		return
+		_return_to_selected_item()
 	else:
+		_explorer_select_folder(parent_path)
 		selected_anim = ""
-		update()
 
 
 # UI INTERACTION
