@@ -20,7 +20,7 @@ func change_curve_value(value: float):
 		position = Vector2(0, box_size)
 		_determine_points()
 	
-	var real_offset = editor_offset * 2 / 3
+	var real_offset = (editor_offset * 2 / 3) + 1
 	position += Vector2(real_offset, real_offset)
 
 #UPDATE

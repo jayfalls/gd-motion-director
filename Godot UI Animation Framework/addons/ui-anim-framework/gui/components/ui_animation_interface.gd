@@ -46,8 +46,6 @@ func _update_interface() -> void:
 
 ## Toggle between interfaces
 func interface_toggle(group: PackedStringArray, index: int) -> void:
-	if self[group[index]].visible:
-		return
 	for variable_ref in group:
 		self[variable_ref].hide()
 	self[group[index]].show()
