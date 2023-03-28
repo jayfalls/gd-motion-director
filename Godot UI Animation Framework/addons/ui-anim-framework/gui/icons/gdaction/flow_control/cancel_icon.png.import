@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dicufln787rqa"
-path="res://.godot/imported/select_down_icon.png-bbf3c689ef71886ad5535688234eeb1d.ctex"
+uid="uid://vi5thoax3m0s"
+path="res://.godot/imported/cancel_icon.png-3faec17fde651fef6ca15cd5a7fbd44e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ui-anim-framework/gui/icons/select_down_icon.png"
-dest_files=["res://.godot/imported/select_down_icon.png-bbf3c689ef71886ad5535688234eeb1d.ctex"]
+source_file="res://addons/ui-anim-framework/gui/icons/gdaction/flow_control/cancel_icon.png"
+dest_files=["res://.godot/imported/cancel_icon.png-3faec17fde651fef6ca15cd5a7fbd44e.ctex"]
 
 [params]
 

@@ -9,9 +9,13 @@ var file_explorer: UIAnimationInterface
 ## Children
 @onready var current_selected_label: Label = $%CurrentSelectedLabel
 @onready var animation_tools_interface: HBoxContainer = $%AnimationToolsInterface
+@onready var instructions_interface: VBoxContainer = $%InstructionsInterface
+### Properties
+@onready var properties_interface: VBoxContainer = $%PropertiesInterface
 @onready var tool_options_button: OptionButton = $%ToolOptionsButton
 ### Controls
 @onready var controls_interface: MarginContainer = $%ControlsInterface
+@onready var main_settings: HBoxContainer = $%MainSettings
 ### Property Type
 @onready var property_type_interface : MarginContainer = $%PropertyTypeInterface
 @onready var property_options_button: OptionButton = $%PropertyOptionsButton
@@ -31,8 +35,15 @@ var file_explorer: UIAnimationInterface
 
 ## Constants
 const main_interfaces: PackedStringArray = [
+	"instructions_interface",
+	"properties_interface"
+]
+const properties_interfaces: PackedStringArray = [
 	"controls_interface",
 	"property_type_interface"
+]
+const controls_interfaces: PackedStringArray = [
+	"main_settings"
 ]
 const property_type_interfaces: PackedStringArray = [
 	"no_property_interface",
@@ -44,6 +55,7 @@ const property_type_interfaces: PackedStringArray = [
 
 ## Temp Values
 ### Animation File
+var saving: bool = false
 var anim_file: UIAnimation
 var current_anim: String = "" # Path to the anim file
 var current_anim_name: String
@@ -53,9 +65,10 @@ var anim_changed: bool = false
 
 # INITIALISATION
 func _ready_inject() -> void:
-	await  get_tree().process_frame
+	await get_tree().process_frame
 	
-	interface_toggle(main_interfaces, 0)
+	
+	interface_toggle(properties_interfaces, 0)
 	
 	# Property Types Interface
 	property_options_button.clear()
@@ -72,7 +85,9 @@ func _load_anim_file() -> void:
 	anim_file = ResourceLoader.load(current_anim)
 
 func _save_anim_file() -> void:
+	saving = true
 	ResourceSaver.save(anim_file, current_anim)
+	saving = false
 
 
 # POPULATE UI
@@ -85,6 +100,8 @@ func _populate_interface() -> void:
 		populating = false
 		return
 	
+	while saving:
+		pass
 	populating = true
 	if current_anim == "":
 		anim_file == null
@@ -124,9 +141,9 @@ func _update_interface() -> void:
 	animation_tools_interface.show()
 	match tool_options_button.selected:
 		0:
-			interface_toggle(main_interfaces, 0)
+			interface_toggle(properties_interfaces, 0)
 		1:
-			interface_toggle(main_interfaces, 1)
+			interface_toggle(properties_interfaces, 1)
 			_update_property_type()
 
 func _update_property_type():

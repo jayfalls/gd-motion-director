@@ -7,8 +7,8 @@ signal settings_toggle
 
 # VARIABLES
 ## Icons
-@onready var settings_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/settings_icon.png")
-@onready var exit_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/exit_icon.png")
+@onready var settings_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/tools/settings_icon.png")
+@onready var exit_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/tools/exit_icon.png")
 
 ## States
 var is_exit: bool = false

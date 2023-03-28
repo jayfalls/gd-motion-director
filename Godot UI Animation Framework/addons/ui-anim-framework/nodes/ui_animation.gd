@@ -6,6 +6,10 @@ class_name UIAnimation extends Resource
 const is_anim_file: Object = null
 
 ## Dynamic Values
+### Animation Data
+@export var animations:Dictionary = {
+	"root": UIAnimationConstants.SEQUENCE_ROOT
+	}
 ### Property Type
 @export var property_type: int = 0
 @export var delay_value: float = 1

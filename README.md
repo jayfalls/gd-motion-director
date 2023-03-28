@@ -5,8 +5,9 @@
 
 </p>
 <p align="center">
+    <img src="https://img.shields.io/badge/Godot-4.0.1-blue">
     <img src="https://img.shields.io/badge/status-not%20functional-red">
-    <img src ="https://img.shields.io/badge/version-0.6.0-brightgreen">
+    <img src ="https://img.shields.io/badge/version-0.6.4-brightgreen">
 </p>
 
 A plugin for Godot to make animating both large and small chunks of UI as easy and effective as possible. 

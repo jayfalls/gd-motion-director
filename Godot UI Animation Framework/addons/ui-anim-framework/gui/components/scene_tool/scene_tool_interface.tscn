@@ -1,11 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://co58s2qlh7fe7"]
+[gd_scene load_steps=23 format=3 uid="uid://biwldurwtmjmg"]
 
-[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/add_icon.png" id="1_8wnue"]
+[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/tools/add_icon.png" id="1_8wnue"]
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/scene_tool/scene_tool_interface.gd" id="1_ikslr"]
-[ext_resource type="Texture2D" uid="uid://cx088m8x6loav" path="res://addons/ui-anim-framework/gui/icons/delete_icon.png" id="3_cl4ew"]
-[ext_resource type="Texture2D" uid="uid://doq3xuydq8hch" path="res://addons/ui-anim-framework/gui/icons/rename_icon.png" id="3_mvgy0"]
-[ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/select_up_icon.png" id="4_eaehi"]
-[ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/select_down_icon.png" id="5_jtoq7"]
+[ext_resource type="Texture2D" uid="uid://doq3xuydq8hch" path="res://addons/ui-anim-framework/gui/icons/tools/rename_icon.png" id="3_mvgy0"]
+[ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/tools/select_up_icon.png" id="4_eaehi"]
+[ext_resource type="Texture2D" uid="uid://cx088m8x6loav" path="res://addons/ui-anim-framework/gui/icons/tools/delete_icon.png" id="4_xdt5q"]
+[ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/tools/select_down_icon.png" id="5_jtoq7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xyrl7"]
 
@@ -46,10 +46,10 @@ bg_color = Color(0.0352941, 0.0352941, 0.0352941, 1)
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oamnb"]
-
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w1oh1"]
 size = Vector2(10, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oamnb"]
 
 [node name="SceneToolInterface" type="MarginContainer"]
 theme_override_constants/margin_top = 4
@@ -168,7 +168,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ytgr6")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wl6")
-icon = ExtResource("3_cl4ew")
+icon = ExtResource("4_xdt5q")
 
 [node name="MarginContainer" type="MarginContainer" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer"]
 layout_mode = 2
@@ -244,7 +244,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ytgr6")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_r1c8y")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wl6")
-icon = ExtResource("3_cl4ew")
+icon = ExtResource("4_xdt5q")
 
 [node name="SelectedNode" type="VBoxContainer" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer"]
 layout_mode = 2
@@ -271,8 +271,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-icon = ExtResource("1_8wnue")
-icon_alignment = 1
+text = "+"
 
 [node name="AddNodeNameLabel" type="Label" parent="DetectedInterface/HBoxContainer/GroupsInterface/HBoxContainer/SelectedNode/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -343,21 +342,21 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_j0klg")
-icon = ExtResource("1_8wnue")
+icon = SubResource("PlaceholderTexture2D_w1oh1")
 
 [node name="GroupsRenameButton" type="Button" parent="DetectedInterface/HBoxContainer/EventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5v04s")
-icon = ExtResource("3_mvgy0")
+icon = SubResource("PlaceholderTexture2D_w1oh1")
 
 [node name="GroupsDeleteButton" type="Button" parent="DetectedInterface/HBoxContainer/EventsInterface/HBoxContainer/Groups/VBoxContainer/ToolsPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_sq2ue")
 theme_override_styles/hover = SubResource("StyleBoxFlat_oc30j")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a4wl6")
-icon = ExtResource("3_cl4ew")
+icon = SubResource("PlaceholderTexture2D_w1oh1")
 
 [node name="MarginContainer" type="MarginContainer" parent="DetectedInterface/HBoxContainer/EventsInterface/HBoxContainer"]
 layout_mode = 2

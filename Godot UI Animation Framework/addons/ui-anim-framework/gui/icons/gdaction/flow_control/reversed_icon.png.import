@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0rqjg1weco5m"
-path="res://.godot/imported/folder_icon.png-820da725f411dbc8da6294ae93818279.ctex"
+uid="uid://djhhkls7rgy0o"
+path="res://.godot/imported/reversed_icon.png-0a37dd20821687e8772960ce76aff88d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ui-anim-framework/gui/icons/folder_icon.png"
-dest_files=["res://.godot/imported/folder_icon.png-820da725f411dbc8da6294ae93818279.ctex"]
+source_file="res://addons/ui-anim-framework/gui/icons/gdaction/flow_control/reversed_icon.png"
+dest_files=["res://.godot/imported/reversed_icon.png-0a37dd20821687e8772960ce76aff88d.ctex"]
 
 [params]
 

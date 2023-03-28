@@ -2,23 +2,19 @@ class_name UIAnimationConstants extends Node
 
 # GDAction Types
 enum CHAINING {
-	GROUP,
 	SEQUENCE,
+	GROUP,
+	IF_ELSE,
+	WHILE,
 	REPEAT,
 	REPEAT_FOREVER
 }
 enum CONTROL_FLOW {
 	WAIT,
 	REVERSED,
-	ALL_PAUSE,
-	GROUP_PAUSE,
-	ACTION_PAUSE,
-	ALL_RESUME,
-	GROUP_RESUME,
-	ACTION_RESUME,
-	ALL_CANCEL,
-	GROUP_CANCEL,
-	ACTION_CANCEL
+	PAUSE,
+	RESUME,
+	CANCEL
 }
 enum ACTIONS {
 	MOVE_TO,
@@ -43,6 +39,22 @@ enum ACTIONS {
 	HIDE,
 	SHOW,
 	REMOVE
+}
+
+# Animation File 
+const SEQUENCE_ROOT: Dictionary = {
+	"name": "sequence",
+	"parent": "none",
+	"children": [],
+	"val1": null,
+	"val2": null,
+}
+const GROUP_ROOT: Dictionary = {
+	"name": "group",
+	"parent": "none",
+	"children": [],
+	"val1": null,
+	"val2": null,
 }
 
 # Property Type

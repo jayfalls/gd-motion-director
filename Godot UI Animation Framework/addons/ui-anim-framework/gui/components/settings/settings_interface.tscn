@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://blva3vfd1y7l8"]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/settings/settings_interface.gd" id="1_vj1gk"]
-[ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/select_up_icon.png" id="2_42ge4"]
-[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/add_icon.png" id="2_pt51n"]
-[ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/select_down_icon.png" id="3_a51ni"]
-[ext_resource type="Texture2D" uid="uid://cx088m8x6loav" path="res://addons/ui-anim-framework/gui/icons/delete_icon.png" id="4_wpypx"]
+[ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/tools/select_up_icon.png" id="2_42ge4"]
+[ext_resource type="Texture2D" uid="uid://b4jrmevk1an3d" path="res://addons/ui-anim-framework/gui/icons/tools/add_icon.png" id="2_pt51n"]
+[ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/tools/select_down_icon.png" id="3_a51ni"]
+[ext_resource type="Texture2D" uid="uid://cx088m8x6loav" path="res://addons/ui-anim-framework/gui/icons/tools/delete_icon.png" id="4_wpypx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42iok"]
 

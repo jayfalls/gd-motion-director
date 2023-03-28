@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gwlr2jrr72ag"
-path="res://.godot/imported/return_to_icon.png-5405ed7384bb1df4d8162c17887b72e1.ctex"
+uid="uid://dy6shf2imtae3"
+path="res://.godot/imported/while_icon.png-511e79ec9455afb23a666759c98288a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ui-anim-framework/gui/icons/return_to_icon.png"
-dest_files=["res://.godot/imported/return_to_icon.png-5405ed7384bb1df4d8162c17887b72e1.ctex"]
+source_file="res://addons/ui-anim-framework/gui/icons/gdaction/chaining/while_icon.png"
+dest_files=["res://.godot/imported/while_icon.png-511e79ec9455afb23a666759c98288a0.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://hyumihdqymhl"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animations_interface.gd" id="1_tfj8e"]
-[ext_resource type="PackedScene" uid="uid://c4nki6lj7h3j8" path="res://addons/ui-anim-framework/gui/components/animations/animations_file_explorer.tscn" id="2_27o1y"]
+[ext_resource type="PackedScene" path="res://addons/ui-anim-framework/gui/components/animations/animations_file_explorer.tscn" id="2_27o1y"]
 [ext_resource type="PackedScene" uid="uid://b23d61k0qabq0" path="res://addons/ui-anim-framework/gui/components/animations/animation_creator.tscn" id="4_02mq1"]
 
 [node name="AnimationsInterface" type="MarginContainer"]

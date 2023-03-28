@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvers8l8w2kul"
-path="res://.godot/imported/select_up_icon.png-900bb887004147964ce24844119a83a5.ctex"
+uid="uid://b4jrmevk1an3d"
+path="res://.godot/imported/add_icon.png-d25a144f701c0a3937c9fa34524a0277.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ui-anim-framework/gui/icons/select_up_icon.png"
-dest_files=["res://.godot/imported/select_up_icon.png-900bb887004147964ce24844119a83a5.ctex"]
+source_file="res://addons/ui-anim-framework/gui/icons/tools/add_icon.png"
+dest_files=["res://.godot/imported/add_icon.png-d25a144f701c0a3937c9fa34524a0277.ctex"]
 
 [params]
 

@@ -56,13 +56,13 @@ func _editor_scene_changed(node: Node):
 	update_ui()
 
 func update_ui() -> void:
+	if settings_button.is_exit:
+		settings_interface.update()
+		#return
 	#if tab_container.current_tab == 0:
 	scene_tool_interface.update()
 	#else:
 	animations_interface.update()
-	if settings_button.is_exit:
-		settings_interface.update()
-	
 
 func _toggle_settings() -> void:
 	if settings_button.is_exit:

@@ -9,7 +9,7 @@ extends UIAnimationInterface
 ## References
 var animation_creator: UIAnimationInterface
 ### Icons
-@onready var folder_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/folder_icon.png")
+@onready var folder_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/tools/folder_icon.png")
 
 ## Children
 @onready var file_explorer: Tree = $%FileExplorerTree
