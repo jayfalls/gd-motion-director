@@ -233,7 +233,6 @@ func _clear_animtree() -> void:
 func _fill_animtree() -> void:
 	animtree_structure = anim_file.animations
 	animtree_root = animtree.create_item()
-	print(animtree_root)
 	animtree_chains["."] = animtree_root
 	var details: Dictionary = animtree_structure["."]
 	var gda_name: String = details["name"]

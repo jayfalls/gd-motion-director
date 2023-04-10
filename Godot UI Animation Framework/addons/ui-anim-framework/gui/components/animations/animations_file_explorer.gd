@@ -186,7 +186,6 @@ func _update_interface() -> void:
 	_update_selected_file()
 	_update_selected_animation()
 	_update_explorer_tools()
-	animation_creator.update()
 
 func _update_selected_file() -> void:
 	selected_file = file_explorer.get_selected()
@@ -215,9 +214,13 @@ func _update_selected_animation() -> void:
 		return
 	if selected_file in file_explorer_folders.values():
 		return
+	var current_selection: String = file_explorer_files.find_key(selected_file)
+	if selected_anim == current_selection:
+		return
 	
-	selected_anim = file_explorer_files.find_key(selected_file)
+	selected_anim = current_selection
 	selected_anim_name = _get_file_name(selected_anim)
+	animation_creator.update()
 
 func _update_explorer_tools() -> void:
 	file_return_to_button.disabled = false
@@ -373,10 +376,12 @@ func _create_anim_file(file_name: String) -> void:
 	var anim_file := UIAnimation.new()
 	var file_path: String = creation_folder + file_name.to_lower() + ".res"
 	ResourceSaver.save(anim_file, file_path)
+	selected_anim = file_path
+	selected_anim_name = _get_file_name(file_path)
+	animation_creator.update()
 	_new_files()
 	await populated
-	selected_anim = file_path
-	_return_to_selected_item()
+	_return_to_selected_item()	
 
 func _create_folder(folder_name: String) -> void:
 	var path: String = creation_folder + folder_name + "/"
@@ -483,7 +488,6 @@ func _rename_file(name: String, parent_dir: String = "") -> void:
 func _delete_file() -> void:
 	var delete_path: String = file_explorer_all_files.find_key(selected_file)
 	var parent_path: String = _get_parent_folder(delete_path)
-	print(parent_path)
 	OS.move_to_trash(ProjectSettings.globalize_path(delete_path))
 	_new_files()
 	await populated
@@ -492,6 +496,7 @@ func _delete_file() -> void:
 	else:
 		_explorer_select_folder(parent_path)
 		selected_anim = ""
+	animation_creator.update()
 
 
 # UI INTERACTION
