@@ -11,7 +11,6 @@ enum CHAINING {
 }
 enum CONTROL_FLOW {
 	WAIT,
-	REVERSED,
 	PAUSE,
 	RESUME,
 	CANCEL
@@ -43,28 +42,34 @@ enum ACTIONS {
 
 # Animation File 
 const SEQUENCE_ROOT: Dictionary = {
-	"name": "sequence",
+	"name": "Sequence",
+	"index": 0,
 	"parent": "none",
 	"children": [],
 	"val1": null,
 	"val2": null,
+	"property_type": null,
+	"property_val": null
 }
 const GROUP_ROOT: Dictionary = {
-	"name": "group",
+	"name": "Group",
+	"index": 0,
 	"parent": "none",
 	"children": [],
 	"val1": null,
 	"val2": null,
+	"property_type": null,
+	"property_val": null
 }
 
 # Property Type
-const PROPERTY_TYPES: PackedStringArray = [
-	"None",
-	"Delay",
-	"Speed",
-	"Curve",
-	"Ease"
-]
+enum PROPERTY_TYPES {
+	NONE,
+	DELAY,
+	SPEED,
+	CURVE,
+	EASE
+}
 ## Easing Presets
 const EASING_PRESETS: Dictionary = {
 	"Linear": 1,

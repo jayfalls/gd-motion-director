@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b23d61k0qabq0"]
+[gd_scene load_steps=21 format=3 uid="uid://b23d61k0qabq0"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animation_creator.gd" id="1_asyqv"]
 [ext_resource type="PackedScene" uid="uid://bp8oqgph1ih14" path="res://addons/ui-anim-framework/gui/components/animations/sub_components/ease_curve_visualiser.tscn" id="2_8hb1o"]
@@ -27,6 +27,8 @@ bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ebh8r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0h5g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lge4d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h7r3"]
 
@@ -64,26 +66,26 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="StructureDisplayInterface" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface"]
+[node name="AnimationTreeInterface" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="ExpandSeparator" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer"]
+[node name="ExpandSeparator" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ControlToolsPanel" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer"]
+[node name="ControlToolsPanel" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="MoveUpButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer/ControlToolsPanel"]
+[node name="MoveUpButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -92,7 +94,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_b7hhj")
 icon = ExtResource("2_n4sd8")
 icon_alignment = 1
 
-[node name="ReparentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer/ControlToolsPanel"]
+[node name="ReparentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -101,7 +103,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("3_qnk6x")
 icon_alignment = 1
 
-[node name="CancelButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer/ControlToolsPanel"]
+[node name="CancelButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
 visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -111,7 +113,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("4_hwqf3")
 icon_alignment = 1
 
-[node name="MoveDownButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer/ControlToolsPanel"]
+[node name="MoveDownButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -120,33 +122,37 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_s0h5g")
 icon = ExtResource("4_sqeoi")
 icon_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FixedSpacer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer"]
+[node name="FixedSpacer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="AnimationTree" type="Tree" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer2"]
+[node name="AnimationTree" type="Tree" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/parent_hl_line_color = Color(1, 1, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lge4d")
 allow_reselect = true
+hide_folding = true
 
-[node name="CreateToolsPanel" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer2"]
+[node name="CreateToolsPanel" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_constants/separation = 35
 alignment = 1
 
-[node name="AddActionButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer2/CreateToolsPanel"]
+[node name="AddActionButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -155,7 +161,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_gbpba")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_b7hhj")
 icon = ExtResource("5_jtpys")
 
-[node name="AddControlflowButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer2/CreateToolsPanel"]
+[node name="AddControlflowButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -164,7 +170,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_m1wl1")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("6_3uyoa")
 
-[node name="AddChainingButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer2/CreateToolsPanel"]
+[node name="AddChainingButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -173,7 +179,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_ebh8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s0h5g")
 icon = ExtResource("7_s5wcf")
 
-[node name="DeleteButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/StructureDisplayInterface/VBoxContainer2/CreateToolsPanel"]
+[node name="DeleteButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -206,17 +212,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ToolOptionsButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-item_count = 2
-selected = 0
-popup/item_0/text = "Controls"
-popup/item_0/id = 0
-popup/item_1/text = "Property"
-popup/item_1/id = 1
-
 [node name="ControlsInterface" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -225,18 +220,12 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ChainingTypeLabel" type="Label" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/ControlsInterface/MainSettings"]
+[node name="GDATypeLabel" type="Label" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/ControlsInterface/MainSettings"]
 layout_mode = 2
-text = "ChainingType"
+text = "Type"
 
-[node name="ChainingTypeButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/ControlsInterface/MainSettings"]
+[node name="GDATypeButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/ControlsInterface/MainSettings"]
 layout_mode = 2
-item_count = 2
-selected = 0
-popup/item_0/text = "Sequence"
-popup/item_0/id = 0
-popup/item_1/text = "Group"
-popup/item_1/id = 1
 
 [node name="PropertyTypeInterface" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface"]
 unique_name_in_owner = true
@@ -355,8 +344,24 @@ popup/item_8/id = 8
 popup/item_9/text = "EaseInOutQuint"
 popup/item_9/id = 9
 
-[connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/ToolOptionsButton" to="." method="_on_tool_options_button_item_selected"]
+[node name="ExpandSeparator" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ToolOptionsButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "Controls"
+popup/item_0/id = 0
+popup/item_1/text = "Property"
+popup/item_1/id = 1
+
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/AnimationTree" to="." method="_on_animation_tree_item_selected"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/PropertyOptionsButton" to="." method="_on_property_options_button_item_selected"]
 [connection signal="drag_ended" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/EasingInterface/EasingControls/EasingValueSlider" to="." method="_on_easing_value_slider_drag_ended"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/EasingInterface/EasingControls/EasingValueSlider" to="." method="_on_easing_value_slider_value_changed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/EasingInterface/EasingControls/HBoxContainer2/EasingPresetsButton" to="." method="_on_easing_presets_button_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/ToolOptionsButton" to="." method="_on_tool_options_button_item_selected"]

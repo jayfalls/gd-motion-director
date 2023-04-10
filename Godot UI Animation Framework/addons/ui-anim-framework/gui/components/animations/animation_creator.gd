@@ -10,6 +10,8 @@ var file_explorer: UIAnimationInterface
 @onready var current_selected_label: Label = $%CurrentSelectedLabel
 @onready var animation_tools_interface: HBoxContainer = $%AnimationToolsInterface
 @onready var instructions_interface: VBoxContainer = $%InstructionsInterface
+### Animation Tree
+@onready var animtree: Tree = $%AnimationTree
 ### Properties
 @onready var properties_interface: VBoxContainer = $%PropertiesInterface
 @onready var tool_options_button: OptionButton = $%ToolOptionsButton
@@ -52,6 +54,40 @@ const property_type_interfaces: PackedStringArray = [
 	"curve_interface",
 	"easing_interface"
 ]
+### Animation Tree
+enum GDACTION_TYPES {
+	ROOT,
+	CHAINING,
+	CONTROL_FLOW,
+	ACTION
+}
+
+## UI Information
+const constant_name_arrays: PackedStringArray = [
+	"chaining_names",
+	"control_flow_names",
+	"actions_names",
+	"property_types_names"
+]
+var chaining_names: PackedStringArray
+@onready var chaining_icons: Array[CompressedTexture2D] = [
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/chaining/sequence_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/chaining/group_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/chaining/if_else_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/chaining/while_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/chaining/repeat_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/chaining/repeat_forever_icon.png")
+]
+var control_flow_names: PackedStringArray
+@onready var control_flow_icons: Array[CompressedTexture2D] = [
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/flow_control/wait_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/flow_control/pause_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/flow_control/resume_icon.png"),
+	preload("res://addons/ui-anim-framework/gui/icons/gdaction/flow_control/cancel_icon.png"),
+]
+var actions_names: PackedStringArray
+@onready var action_icon: CompressedTexture2D = preload("res://addons/ui-anim-framework/gui/icons/gdaction/actions/action_icon.png")
+var property_types_names: PackedStringArray
 
 ## Temp Values
 ### Animation File
@@ -61,23 +97,44 @@ var current_anim: String = "" # Path to the anim file
 var current_anim_name: String
 var detecting_selected: bool = false
 var anim_changed: bool = false
+### Animation Tree
+var animtree_changed: bool = false
+var filling_tree: bool = false
+var animtree_root: TreeItem
+var filled_children: int
+var children_filled: bool = true
+var animtree_chains: Dictionary
+var animtree_control_flows: Dictionary
+var animtree_actions: Dictionary
+var animtree_all_items: Dictionary
+var animtree_structure: Dictionary
+#### Current TreeItem
+var selected_animtree: String
+var selected_animtree_type: int
 
 
 # INITIALISATION
 func _ready_inject() -> void:
 	await get_tree().process_frame
 	
-	
+	_get_constants_names()
 	interface_toggle(properties_interfaces, 0)
 	
 	# Property Types Interface
 	property_options_button.clear()
-	for type in UIAnimationConstants.PROPERTY_TYPES:
+	for type in property_types_names:
 		property_options_button.add_item(type)
 	easing_presets_button.clear()
 	for preset in UIAnimationConstants.EASING_PRESETS.keys():
 		easing_presets_button.add_item(preset)
 	interface_toggle(property_type_interfaces, 0)
+
+func _get_constants_names() -> void:
+	for array in constant_name_arrays:
+		self[array].clear()
+		var constant_name: String = array.replace("_names", "").to_upper()
+		for key_name in UIAnimationConstants[constant_name]:
+			self[array].append(key_name.capitalize())
 
 
 # ANIM FILE
@@ -109,6 +166,8 @@ func _populate_interface() -> void:
 		_load_anim_file()
 	tool_options_button.select(0)
 	anim_changed = false
+	animtree_changed = true
+	selected_animtree = "."	
 	populated.emit()
 	populating = false
 
@@ -138,7 +197,115 @@ func _update_interface() -> void:
 		animation_tools_interface.hide()
 		return
 	
+	if animtree_changed and not filling_tree:
+		_update_animtree()
+	
+	_determine_selected_type()
+
+	interface_toggle(properties_interfaces, 0)
+	tool_options_button.hide()
+	match selected_animtree_type:
+		GDACTION_TYPES.ROOT:
+			_update_root_selected()
+		GDACTION_TYPES.CHAINING:
+			_update_chaining_selected()
+		GDACTION_TYPES.CONTROL_FLOW:
+			_update_control_flow_selected()
+		GDACTION_TYPES.ACTION:
+			_update_action_selected()
+	
 	animation_tools_interface.show()
+
+func _update_animtree() -> void:
+	filling_tree = true
+	_clear_animtree()
+	_fill_animtree()
+
+func _clear_animtree() -> void:
+	animtree.deselect_all()
+	animtree.clear()
+	animtree_structure.clear()
+	animtree_chains.clear()
+	animtree_control_flows.clear()
+	animtree_actions.clear()
+	animtree_all_items.clear()
+
+func _fill_animtree() -> void:
+	animtree_structure = anim_file.animations
+	animtree_root = animtree.create_item()
+	print(animtree_root)
+	animtree_chains["."] = animtree_root
+	var details: Dictionary = animtree_structure["."]
+	var gda_name: String = details["name"]
+	animtree_root.set_text(0, gda_name)
+	animtree_root.set_icon(0, chaining_icons[chaining_names.find(gda_name)])
+	filled_children = 1
+	children_filled = false
+	_fill_animtree_children(animtree_root, details["children"])
+	
+	while not children_filled:
+		pass
+	animtree_all_items.merge(animtree_chains)
+	animtree_all_items.merge(animtree_control_flows)
+	animtree_all_items.merge(animtree_actions)
+	animtree.set_selected(animtree_all_items[selected_animtree], 0)
+	filling_tree = false
+	animtree_changed = false
+
+func _fill_animtree_children(parent_item: TreeItem, children_paths: PackedStringArray) -> void:
+	var dummy_children: Array[TreeItem]
+	for dummy in children_paths:
+		dummy_children.append(animtree.create_item(parent_item))
+	
+	for child_path in children_paths:
+		var child_details: Dictionary = animtree_structure[child_path]
+		var child_gda_name: String = child_details["name"]
+		var child_index: int = child_details["index"]
+
+		var animtree_item: TreeItem = animtree.create_item(parent_item, child_index)
+		animtree_item.set_text(0, child_gda_name)
+		if child_gda_name in chaining_names:
+			animtree_chains[child_path] = animtree_item
+			animtree_chains[child_path].set_icon(0, chaining_icons[chaining_names.find(child_gda_name)])
+			_fill_animtree_children(animtree_item, child_details["children"])
+		elif child_gda_name in control_flow_names:
+			animtree_control_flows[child_path] = animtree_item
+			animtree_control_flows[child_path].set_icon(0, control_flow_icons[control_flow_names.find(child_gda_name)])
+		else:
+			animtree_actions[child_path] = animtree_item	
+			animtree_actions[child_path].set_icon(0, action_icon)
+		
+		filled_children += 1
+
+	for dummy in dummy_children:
+		dummy.free()
+
+	if filled_children == animtree_structure.size():
+		children_filled = true
+
+func _determine_selected_type() -> void:
+	var selected_treeitem: TreeItem = animtree.get_selected()
+	selected_animtree = animtree_all_items.find_key(selected_treeitem)
+	if selected_treeitem == animtree_root:
+		selected_animtree_type = GDACTION_TYPES.ROOT
+	elif selected_treeitem in animtree_chains.values():
+		selected_animtree_type = GDACTION_TYPES.CHAINING
+	elif selected_treeitem in animtree_control_flows.values():
+		selected_animtree_type = GDACTION_TYPES.CONTROL_FLOW
+	else:
+		selected_animtree_type = GDACTION_TYPES.ACTION
+
+func _update_root_selected() -> void:
+	pass
+
+func _update_chaining_selected() -> void:
+	pass
+
+func _update_control_flow_selected() -> void:
+	pass
+
+func _update_action_selected() -> void:
+	tool_options_button.show()
 	match tool_options_button.selected:
 		0:
 			interface_toggle(properties_interfaces, 0)
@@ -151,13 +318,13 @@ func _update_property_type():
 	interface_toggle(property_type_interfaces, property_type)
 	property_options_button.select(property_type)
 	match property_type:
-		1:
+		UIAnimationConstants.PROPERTY_TYPES.DELAY:
 			pass
-		2:
+		UIAnimationConstants.PROPERTY_TYPES.SPEED:
 			pass
-		3:
+		UIAnimationConstants.PROPERTY_TYPES.CURVE:
 			pass
-		4:
+		UIAnimationConstants.PROPERTY_TYPES.EASE:
 			_update_ease()
 
 func _update_ease() -> void:
@@ -176,17 +343,37 @@ func _update_selected_easing_preset(value: float) -> void:
 	else:
 		easing_presets_button.select(-1)
 
+
+# Animation Tree Structure
+func _update_animtree_structure() -> void:
+	pass
+
+func _add_animtree_item(parent: String, type: GDACTION_TYPES, index: int = -1) -> void:
+	pass
+
+func _move_animtree_item(direction: int, new_parent: String = "") -> void:
+	pass
+
+func _delete_animtree_item() -> void:
+	pass
+
+
 # UI INTERACTION
+## Animation Tree
+func _on_animation_tree_item_selected():
+	update()
+
+## Action Selected
 func _on_tool_options_button_item_selected(index):
 	update()
 
-## Property Types
+### Property Types
 func _on_property_options_button_item_selected(index):
 	anim_file.property_type = index
 	_save_anim_file()
 	update()
 
-### Ease
+#### Ease
 func _change_slider_zero_value(value: float) -> float:
 	if value == 0:
 		if anim_file.easing_value < 0:
