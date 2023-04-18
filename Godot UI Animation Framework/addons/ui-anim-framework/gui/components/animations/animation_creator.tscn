@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://b23d61k0qabq0"]
+[gd_scene load_steps=23 format=3 uid="uid://b23d61k0qabq0"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animation_creator.gd" id="1_asyqv"]
 [ext_resource type="PackedScene" uid="uid://bp8oqgph1ih14" path="res://addons/ui-anim-framework/gui/components/animations/sub_components/ease_curve_visualiser.tscn" id="2_8hb1o"]
 [ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/tools/select_up_icon.png" id="2_n4sd8"]
-[ext_resource type="Texture2D" uid="uid://d0e458irc1rgb" path="res://addons/ui-anim-framework/gui/icons/tools/reparent_icon.png" id="3_qnk6x"]
+[ext_resource type="Texture2D" uid="uid://cbk7b0my0yit6" path="res://addons/ui-anim-framework/gui/icons/tools/reparent_down_icon.png" id="3_eehmw"]
+[ext_resource type="Texture2D" uid="uid://b7xfh6clmgw2m" path="res://addons/ui-anim-framework/gui/icons/tools/reparent_up_icon.png" id="4_bxis2"]
 [ext_resource type="Texture2D" uid="uid://cl2mbi8d2jjr0" path="res://addons/ui-anim-framework/gui/icons/tools/cancel_icon.png" id="4_hwqf3"]
 [ext_resource type="Texture2D" uid="uid://dicufln787rqa" path="res://addons/ui-anim-framework/gui/icons/tools/select_down_icon.png" id="4_sqeoi"]
 [ext_resource type="Texture2D" uid="uid://cvxpft4dkv45o" path="res://addons/ui-anim-framework/gui/icons/gdaction/action_icon.png" id="5_jtpys"]
@@ -29,6 +30,8 @@ bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0h5g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lge4d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qjlt6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h7r3"]
 
@@ -82,10 +85,11 @@ size_flags_vertical = 3
 [node name="ControlToolsPanel" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 35
 alignment = 1
 
 [node name="MoveUpButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -94,16 +98,34 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_b7hhj")
 icon = ExtResource("2_n4sd8")
 icon_alignment = 1
 
-[node name="ReparentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+[node name="ReparentingButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="ReparentDownButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/ReparentingButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_m1wl1")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
-icon = ExtResource("3_qnk6x")
+icon = ExtResource("3_eehmw")
 icon_alignment = 1
 
-[node name="CancelButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+[node name="ReparentUpButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/ReparentingButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m1wl1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
+icon = ExtResource("4_bxis2")
+icon_alignment = 1
+
+[node name="CancelReparentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -114,6 +136,7 @@ icon = ExtResource("4_hwqf3")
 icon_alignment = 1
 
 [node name="MoveDownButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -179,7 +202,8 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_ebh8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s0h5g")
 icon = ExtResource("7_s5wcf")
 
-[node name="DeleteButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel"]
+[node name="DeleteGDButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -188,20 +212,25 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("6_2ndn5")
 
 [node name="InstructionsInterface" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="InstructionLabel" type="Label" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface"]
+[node name="InstructionsLabel" type="Label" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Select a new parent"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ConfirmParentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface"]
+[node name="ConfirmReparentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qjlt6")
 text = "Confirm"
 
 [node name="FixedSpacer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface"]
@@ -359,7 +388,11 @@ popup/item_0/id = 0
 popup/item_1/text = "Property"
 popup/item_1/id = 1
 
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/ReparentingButtons/ReparentDownButton" to="." method="_on_reparent_down_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/ReparentingButtons/ReparentUpButton" to="." method="_on_reparent_up_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/CancelReparentButton" to="." method="_on_cancel_reparent_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/AnimationTree" to="." method="_on_animation_tree_item_selected"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface/ConfirmReparentButton" to="." method="_on_confirm_reparent_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/PropertyOptionsButton" to="." method="_on_property_options_button_item_selected"]
 [connection signal="drag_ended" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/EasingInterface/EasingControls/EasingValueSlider" to="." method="_on_easing_value_slider_drag_ended"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/EasingInterface/EasingControls/EasingValueSlider" to="." method="_on_easing_value_slider_value_changed"]

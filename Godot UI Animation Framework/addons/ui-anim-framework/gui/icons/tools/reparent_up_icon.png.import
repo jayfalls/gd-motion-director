@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0e458irc1rgb"
-path="res://.godot/imported/reparent_icon.png-a7f9fbc5f46875dffc0bb1f04740ae38.ctex"
+uid="uid://b7xfh6clmgw2m"
+path="res://.godot/imported/reparent_up_icon.png-c278a3b20a3bbe3c94e131565d69a436.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ui-anim-framework/gui/icons/tools/reparent_icon.png"
-dest_files=["res://.godot/imported/reparent_icon.png-a7f9fbc5f46875dffc0bb1f04740ae38.ctex"]
+source_file="res://addons/ui-anim-framework/gui/icons/tools/reparent_up_icon.png"
+dest_files=["res://.godot/imported/reparent_up_icon.png-c278a3b20a3bbe3c94e131565d69a436.ctex"]
 
 [params]
 

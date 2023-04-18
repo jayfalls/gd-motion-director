@@ -186,6 +186,7 @@ func _update_interface() -> void:
 	_update_selected_file()
 	_update_selected_animation()
 	_update_explorer_tools()
+	animation_creator.update()
 
 func _update_selected_file() -> void:
 	selected_file = file_explorer.get_selected()
