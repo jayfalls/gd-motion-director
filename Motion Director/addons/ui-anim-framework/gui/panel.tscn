@@ -16,7 +16,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpsfl"]
 
-[node name="UI Animation" type="Control"]
+[node name="Motion Director" type="Control"]
 clip_contents = true
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 3
@@ -43,10 +43,10 @@ layout_mode = 2
 theme_override_constants/side_margin = -1
 clip_tabs = false
 
-[node name="SceneToolInterface" parent="MarginContainer/TabContainer" instance=ExtResource("2_oomwt")]
+[node name="SceneTool" parent="MarginContainer/TabContainer" instance=ExtResource("2_oomwt")]
 layout_mode = 2
 
-[node name="AnimationsInterface" parent="MarginContainer/TabContainer" instance=ExtResource("3_gldxd")]
+[node name="Animations" parent="MarginContainer/TabContainer" instance=ExtResource("3_gldxd")]
 visible = false
 layout_mode = 2
 

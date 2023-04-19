@@ -10,8 +10,8 @@ var interface: EditorSelection
 ## Children
 @onready var tab_container: TabContainer = $MarginContainer/TabContainer
 @onready var popup_panel: UIAnimationPopupPanel = $PopupPanel
-@onready var scene_tool_interface: UIAnimationInterface = $MarginContainer/TabContainer/SceneToolInterface
-@onready var animations_interface: UIAnimationInterface = $MarginContainer/TabContainer/AnimationsInterface
+@onready var scene_tool_interface: UIAnimationInterface = $MarginContainer/TabContainer/SceneTool
+@onready var animations_interface: UIAnimationInterface = $MarginContainer/TabContainer/Animations
 @onready var settings_interface: UIAnimationInterface = $MarginContainer/SettingsInterface
 @onready var settings_button: Button = $MarginContainer/MarginContainer/SettingsButton
 
@@ -59,10 +59,11 @@ func update_ui() -> void:
 	if settings_button.is_exit:
 		settings_interface.update()
 		#return
-	#if tab_container.current_tab == 0:
-	scene_tool_interface.update()
-	#else:
-	animations_interface.update()
+	if tab_container.current_tab == 0:
+		scene_tool_interface.update()
+	else:
+		animations_interface.file_explorer.has_new_files = true
+		animations_interface.update()
 
 func _toggle_settings() -> void:
 	if settings_button.is_exit:

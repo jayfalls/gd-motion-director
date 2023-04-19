@@ -1,1 +1,5 @@
-res://anims/sd.res
+res://addons/ui-anim-framework/plugin.gd
+res://addons/ui-anim-framework/gui/panel.gd
+res://addons/ui-anim-framework/gui/components/animations/animations_file_explorer.gd
+res://addons/ui-anim-framework/gui/components/animations/animations_interface.gd
+res://addons/ui-anim-framework/gui/components/animations/animation_creator.gd

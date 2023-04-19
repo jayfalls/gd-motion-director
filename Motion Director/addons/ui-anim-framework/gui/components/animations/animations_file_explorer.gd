@@ -210,6 +210,7 @@ func _update_selected_file() -> void:
 
 func _update_selected_animation() -> void:
 	if file_explorer.get_selected() == null:
+		selected_anim = ""
 		return
 	if selected_file_type != FILE_TYPES.DEFAULT_FILE and selected_file_type != FILE_TYPES.ANIM_FILE:
 		return

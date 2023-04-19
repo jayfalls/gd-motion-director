@@ -180,6 +180,9 @@ func _populate_interface() -> void:
 	_detect_selected_anim()
 	while detecting_selected:
 		pass
+	if not ResourceLoader.exists(current_anim):
+		anim_changed = true
+		current_anim = ""
 	if not anim_changed:
 		populated.emit()
 		populating = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=25 format=3 uid="uid://bfv4c1u1hj0jr"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/settings/settings_interface.gd" id="1_vj1gk"]
 [ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/tools/select_up_icon.png" id="2_42ge4"]
@@ -217,14 +217,14 @@ layout_mode = 2
 text = "UI Animation Framework
 An easy to work with, modular, extendable framework for animating all the UI and other things in your project
 Jayfalls
-v0.6.0"
+v0.6.6"
 horizontal_alignment = 1
 
 [node name="AboutLinkButton" type="LinkButton" parent="HBoxContainer/MarginContainer/AboutInterface/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Github"
-uri = "https://github.com/jayfalls/gd-ui-anim-framework"
+uri = "https://github.com/jayfalls/gd-motion-director"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 initial_position = 2

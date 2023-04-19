@@ -23,7 +23,7 @@ func _enter_tree():
 	panel.editor_file_system = get_editor_interface().get_resource_filesystem()
 	panel.interface = get_editor_interface().get_selection()
 	scene_changed.connect(panel._editor_scene_changed)
-	add_control_to_bottom_panel(panel, "UI Animation")
+	add_control_to_bottom_panel(panel, "Motion Director")
 
 func _exit_tree():
 	# Clean-up of the plugin goes here.
