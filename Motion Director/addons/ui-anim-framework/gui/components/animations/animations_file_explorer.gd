@@ -363,7 +363,7 @@ func _get_sibling_names(path: String, type: int = 0) -> PackedStringArray:
 
 
 # FILE MANAGEMENT
-func _new_files() -> void:
+func _new_files() -> void:	
 	has_new_files = true
 	main_panel._refresh_files()
 	update()

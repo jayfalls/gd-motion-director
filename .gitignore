@@ -1,3 +1,2 @@
 # Godot 4+ specific ignores
-/Godot UI Animation Framework/.godot/
-/media/logo.xcf
+/Motion Director/.godot/

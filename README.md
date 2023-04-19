@@ -26,6 +26,7 @@ A huge shout-out to the projects who were generous enough to release their code 
 ### Dependencies
 [GD-Action](https://github.com/duongvituan/godot-action-animation-framework)
 All the animations are handled by this awesome plugin.
+
 [Godot Sprite Shader](https://github.com/duongvituan/godot-sprite-shader)
 This provides almost all the default shaders.
 ### Contributions
