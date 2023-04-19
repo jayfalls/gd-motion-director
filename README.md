@@ -7,7 +7,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Godot-4.0.1-blue">
     <img src="https://img.shields.io/badge/status-not%20functional-red">
-    <img src ="https://img.shields.io/badge/version-0.6.4-brightgreen">
+    <img src ="https://img.shields.io/badge/version-0.6.6-brightgreen">
 </p>
 
 A plugin for Godot to make animating both large and small chunks of UI as easy and effective as possible. 
@@ -16,6 +16,10 @@ A plugin for Godot to make animating both large and small chunks of UI as easy a
 - Manage everything from one GUI panel
 - Combine [GDActions](https://github.com/duongvituan/godot-action-animation-framework) and shader effects in unlimited ways
 - No Code
+
+# Upcoming Features
+- 3D Support
+- Live Preview
 
 # 🥰 Credits
 A huge shout-out to the projects who were generous enough to release their code under MIT License as to allow me to use and take inspiration for my project.
