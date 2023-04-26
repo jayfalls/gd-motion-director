@@ -7,7 +7,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Godot-4.0.2-blue">
     <img src="https://img.shields.io/badge/status-not%20functional-red">
-    <img src ="https://img.shields.io/badge/version-0.6.6-brightgreen">
+    <img src ="https://img.shields.io/badge/version-0.6.7-brightgreen">
 </p>
 
 A plugin for Godot to make animating UI, cameras, swarms of nodes and anything else you can imagine as easy and effective as possible. 

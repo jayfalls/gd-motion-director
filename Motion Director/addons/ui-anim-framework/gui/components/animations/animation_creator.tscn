@@ -72,7 +72,6 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface"]
 layout_mode = 2
-theme_override_constants/separation = 0
 alignment = 1
 
 [node name="ExpandSeparator" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
@@ -80,19 +79,17 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ControlToolsPanel" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
+[node name="ControlToolsPanel" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
+layout_mode = 2
+
+[node name="MoveTools" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_constants/separation = 35
 alignment = 1
 
-[node name="MovingButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 35
-alignment = 1
-
-[node name="ReparentUpButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MovingButtons"]
+[node name="MoveUpButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MoveTools"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -102,7 +99,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("4_bxis2")
 icon_alignment = 1
 
-[node name="ReparentDownButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MovingButtons"]
+[node name="MoveDownButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MoveTools"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
@@ -112,7 +109,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("3_eehmw")
 icon_alignment = 1
 
-[node name="CancelReparentButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel"]
+[node name="CancelMoveButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -366,9 +363,9 @@ popup/item_0/id = 0
 popup/item_1/text = "Property"
 popup/item_1/id = 1
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MovingButtons/ReparentUpButton" to="." method="_on_reparent_up_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MovingButtons/ReparentDownButton" to="." method="_on_reparent_down_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/CancelReparentButton" to="." method="_on_cancel_reparent_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MoveTools/MoveUpButton" to="." method="_on_move_up_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MoveTools/MoveDownButton" to="." method="_on_move_down_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/CancelMoveButton" to="." method="_on_cancel_move_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/AnimationTree" to="." method="_on_animation_tree_item_selected"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface/ConfirmReparentButton" to="." method="_on_confirm_reparent_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/PropertyOptionsButton" to="." method="_on_property_options_button_item_selected"]

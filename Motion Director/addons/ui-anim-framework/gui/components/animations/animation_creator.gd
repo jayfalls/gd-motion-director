@@ -12,10 +12,10 @@ var file_explorer: UIAnimationInterface
 ### Animation Tree
 @onready var animtree: Tree = $%AnimationTree
 #### Control Tools
-@onready var moving_buttons: VBoxContainer = $%MovingButtons
-@onready var reparent_down_button: Button = $%ReparentDownButton
-@onready var reparent_up_button: Button = $%ReparentUpButton
-@onready var cancel_reparent_button: Button = $%CancelReparentButton
+@onready var cancel_move_button: Button = $%CancelMoveButton
+@onready var move_tools: VBoxContainer = $%MoveTools
+@onready var move_up_button: Button = $%MoveUpButton
+@onready var move_down_button: Button = $%MoveDownButton
 #### Create Tools
 @onready var add_chaining_button: Button = $%AddChainingButton
 @onready var add_action_button: Button = $%AddActionButton
@@ -74,9 +74,9 @@ enum GDACTION_TYPES {
 	CONTROL_FLOW,
 	ACTION
 }
-const reparent_buttons: PackedStringArray = [
-	"moving_buttons",
-	"cancel_reparent_button"
+const move_buttons: PackedStringArray = [
+	"move_tools",
+	"cancel_move_button"
 ]
 
 ## UI Information
@@ -180,7 +180,7 @@ func _populate_interface() -> void:
 		pass
 	_detect_selected_anim()
 	while detecting_selected:
-		pass	
+		pass
 	if not ResourceLoader.exists(current_anim):
 		anim_changed = true
 		current_anim = ""
@@ -204,7 +204,7 @@ func _populate_interface() -> void:
 	anim_changed = false
 	animtree_changed = true
 	_normal_ui()	
-	selected_animtree = "."	
+	selected_animtree = "."
 	populated.emit()
 	populating = false
 
@@ -347,13 +347,15 @@ func _set_animtree_tools() -> void:
 	delete_gd_button.disabled = true
 	if selected_animtree_type == GDACTION_TYPES.ROOT:
 		return
-	if selected_animtree_type != GDACTION_TYPES.CHAINING:
-		_set_moving_buttons_disabled(false)
+	_set_moving_buttons_disabled(false)
+	var selected_parent: String = animtree_structure[selected_animtree]["parent"]
+	if animtree_structure[selected_parent]["children"].size() == 1:
+		return
 	delete_gd_button.disabled = false
 
 func _set_moving_buttons_disabled(disabled: bool) -> void:
-	reparent_up_button.disabled = disabled
-	reparent_down_button.disabled  = disabled
+	move_up_button.disabled = disabled
+	move_down_button.disabled  = disabled
 
 func _set_ui_to_gd_type() -> void:
 	tool_options_button.hide()
@@ -423,106 +425,80 @@ func _update_animtree_structure() -> void:
 func _add_animtree_item(parent: String, type: GDACTION_TYPES, index: int = -1) -> void:
 	pass
 
-func _move_animtree_item() -> void:	
-	var chaining_selected: bool = selected_animtree_type == GDACTION_TYPES.CHAINING or selected_animtree_type == GDACTION_TYPES.ROOT
-	var selected_parent: String
+func _move_animtree_item() -> void:
+	var selected_parent: String = animtree_structure[selected_animtree]["parent"]
 	var moving_parent: String = animtree_structure[moving_selected]["parent"]
-	var same_parent: bool
-	if chaining_selected:
-		selected_parent = selected_animtree 
+	var same_parent: bool = selected_parent == moving_parent
+	if same_parent: 
+		_update_animtree_indexes(selected_parent)
 	else:
-		selected_parent = animtree_structure[selected_animtree]["parent"]
-	same_parent = selected_parent == moving_parent
-	if not same_parent: 
-		_remove_animtree_child_from_parent()	
-	_change_animtree_indexes(chaining_selected, same_parent, selected_parent)		
-	if not same_parent:
-		_add_animtree_child_to_parent()
-	_save_anim_file()	
+		_remove_animtree_child_from_parent(moving_parent)
+		_add_animtree_child_to_parent(selected_parent)
+		_update_animtree_name()
+	moving = false
+	_save_anim_file()
 	update()
 
-func _remove_animtree_child_from_parent() -> void:
-	var moving_parent: String = animtree_structure[moving_selected]["parent"]
-	var parent_children: PackedStringArray = animtree_structure[moving_parent]["children"]
-	var index: int = parent_children.find(moving_selected)	
-	parent_children.remove_at(index)	
-	animtree_structure[moving_parent]["children"] = parent_children
-	var selected_index: int = animtree_structure[moving_selected]["index"]
-	_reorder_higher_indexes(moving_parent, selected_index, true)
+func _update_animtree_indexes(parent: String) -> void:
+	var old_index: int = animtree_structure[moving_selected]["index"]
+	var new_index: int = _determine_new_index(false)
+	if new_index < old_index:
+		_reorder_higher_indexes(parent, old_index, true)
+		_reorder_higher_indexes(parent, new_index - 1)
+	else:
+		_reorder_higher_indexes(parent, new_index)
+		_reorder_higher_indexes(parent, old_index, true)
+	animtree_structure[moving_selected]["index"] = new_index
 
-func _change_animtree_indexes(chaining_selected: bool, same_parent: bool, selected_parent: String) -> void:
-	var details: Dictionary = animtree_structure[moving_selected]
-	var selected_index: int 
-	var index: int
-	var needs_reindexing: bool = true	
-	if chaining_selected:	
-		if moving_up:
-			index = 0
-		else:		
-			if same_parent: 
-				selected_index = animtree_structure[selected_parent]["children"].size() - 1
-			else:
-				needs_reindexing = false
-				selected_index = animtree_structure[selected_parent]["children"].size()
-			index = selected_index	
-	else:	
-		selected_index = animtree_structure[selected_animtree]["index"]
+func _remove_animtree_child_from_parent(parent: String) -> void:
+	var parent_children: PackedStringArray = animtree_structure[parent]["children"]
+	var remove_name_index: int = parent_children.find(moving_selected)
+	parent_children.remove_at(remove_name_index)
+	animtree_structure[parent]["children"] = parent_children
+	var remove_index: int = animtree_structure[moving_selected]["index"]
+	_reorder_higher_indexes(parent, remove_index, true)
+
+func _add_animtree_child_to_parent(parent: String) -> void:
+	_add_to_children_indexes(parent)
+	_add_name_to_parent_children(parent)
+	animtree_structure[moving_selected]["parent"] = parent
+
+func _add_to_children_indexes(parent: String) -> void:
+	var new_index: int = _determine_new_index()
+	_reorder_higher_indexes(parent, new_index - 1)
+	animtree_structure[moving_selected]["index"] = new_index
+
+func _determine_new_index(add: bool = true) -> int:
+	var selected_index: int = animtree_structure[selected_animtree]["index"]
+	var new_index: int
+	if moving_up:
 		if selected_index == 0:
-			index = 0
-		if same_parent:
-			index = selected_index
+			new_index = 0
 		else:
-			if moving_up:
-				index = selected_index - 1
-			else:
-				index = selected_index + 1	
-	
-	if not same_parent:
-		details["parent"] = selected_parent
-	var moved_up: bool = details["index"] < index
-	if needs_reindexing:
-		if same_parent:
-			if moved_up:
-				_reorder_higher_indexes(selected_parent, index)
-				_reorder_higher_indexes(selected_parent, details["index"], true)	
-			else:
-				_reorder_higher_indexes(selected_parent, details["index"], true)
-				_reorder_higher_indexes(selected_parent, index)
+			new_index = selected_index
+	else:
+		if add:
+			new_index = selected_index + 1
 		else:
-			_reorder_higher_indexes(selected_parent, index)
-	details["index"] = index
-	
-	animtree_structure[moving_selected] = details
+			new_index = selected_index
+	return new_index
 
-func _add_animtree_child_to_parent() -> void:
-	var new_parent: String = animtree_structure[moving_selected]["parent"]
-	var new_children: PackedStringArray = animtree_structure[new_parent]["children"]
-	var new_child: String = new_parent + "/" + animtree_structure[moving_selected]["name"]
-	new_children.append(new_child)
-	animtree_structure[new_child] = animtree_structure[moving_selected]
-	animtree_structure.erase(moving_selected)	
-	animtree_structure[new_parent]["children"] = new_children
+func _add_name_to_parent_children(parent: String) -> void:
+	var new_children: PackedStringArray = animtree_structure[parent]["children"]
+	var new_child: String = parent + "/" + animtree_structure[moving_selected]["name"]
 	selected_animtree = new_child
+	new_children.append(new_child)
+	animtree_structure[parent]["children"] = new_children
+
+func _update_animtree_name() -> void:
+	animtree_structure[selected_animtree] = animtree_structure[moving_selected]
+	animtree_structure.erase(moving_selected)
 
 func _reorder_higher_indexes(selected_parent: String, index: int, decrease: bool = false) -> void:
-	var children: PackedStringArray = animtree_structure[selected_parent]["children"]	
+	var children: PackedStringArray = animtree_structure[selected_parent]["children"]
 	for child in children:
 		var child_index: int = animtree_structure[child]["index"] 
-		if child_index < index:
-			continue
-
-		var change: int
-		if decrease:
-			change = -1
-		else:
-			change = 1
-		animtree_structure[child]["index"] = child_index + change
-
-func _reorder_lower_indexes(selected_parent: String, index: int, decrease: bool = false) -> void:
-	var children: PackedStringArray = animtree_structure[selected_parent]["children"]	
-	for child in children:
-		var child_index: int = animtree_structure[child]["index"] 
-		if child_index > index:
+		if child_index <= index:
 			continue
 
 		var change: int
@@ -539,43 +515,45 @@ func _detect_valid_move() -> void:
 	instructions_label.add_theme_color_override("font_color", Color.WHITE)
 	instructions_label.text = "Move GDAction"
 	confirm_reparent_button.disabled = false 
-
+	
+	if selected_animtree_type == GDACTION_TYPES.ROOT:
+		_invalid_move("Cannot Be The Root")
+		return
+	var moving_name = animtree_structure[moving_selected]["name"]
 	if _is_invalid_move():
-		instructions_label.add_theme_color_override("font_color", Color.ORANGE)
-		instructions_label.text = "Can't Be The Same"
-		confirm_reparent_button.disabled = true
+		_invalid_move("Cannot Be The Same")
+		return
+	if moving_name in chaining_names:
+		var selected_parent: String = animtree_structure[selected_animtree]["parent"]
+		var moving_parent: String = animtree_structure[moving_selected]["parent"]
+		if selected_parent != moving_parent:
+			_invalid_move("Cannot Reparent a Chaining Action")
+			return
+
+func _invalid_move(reason: String) -> void:
+	instructions_label.add_theme_color_override("font_color", Color.ORANGE)
+	instructions_label.text = reason
+	confirm_reparent_button.disabled = true
 
 func _is_invalid_move() -> bool:
-	var selected_parent: String = animtree_structure[moving_selected]["parent"]
-	var selected_siblings: PackedStringArray = animtree_structure[selected_parent]["children"]
-	var selected_index: int = animtree_structure[moving_selected]["index"] 
-	var selected_animtree_index: int = animtree_structure[selected_animtree]["index"]	
-	var sibling_selected: bool = selected_animtree in selected_siblings
-	var parent_selected: bool = selected_animtree == selected_parent
-	var chaining_selected: bool = selected_animtree_type == GDACTION_TYPES.CHAINING 
-
-	if not sibling_selected and not parent_selected: 
+	if moving_selected == selected_animtree:
+		return true
+	var moving_parent: String = animtree_structure[moving_selected]["parent"]
+	var moving_siblings: PackedStringArray = animtree_structure[moving_parent]["children"]
+	var sibling_selected: bool = selected_animtree in moving_siblings
+	if not sibling_selected:
 		return false
-	if chaining_selected and not parent_selected:  
-		return false
-	if parent_selected:	
-		if moving_up: 
-			if selected_index != 0:
-				return false
-		else:
-			if selected_index != selected_siblings.size() - 1:
-				return false
-	else:
-		if moving_selected == selected_animtree:
-			pass
-		elif moving_up:
-			if selected_index != selected_animtree_index - 1:
-				return false
-		else:
-			if selected_index != selected_animtree_index + 1:
-				return false
 	
-	return true
+	var moving_index: int = animtree_structure[moving_selected]["index"] 
+	var selected_animtree_index: int = animtree_structure[selected_animtree]["index"]
+	if moving_up:
+			if moving_index == selected_animtree_index - 1:
+				return true
+	else:
+			if moving_index == selected_animtree_index + 1:
+				return true
+	
+	return false
 
 # UI INTERACTION
 ## Animation Tree
@@ -583,33 +561,32 @@ func _on_animation_tree_item_selected():
 	update()
 
 ### Control Tools
-func _on_reparent_up_button_pressed():
+func _on_move_up_button_pressed():
 	moving_up = true
-	_reparent_ui()
+	_move_ui()
 
-
-func _on_reparent_down_button_pressed():	
+func _on_move_down_button_pressed():
 	moving_up = false
-	_reparent_ui()
+	_move_ui()
 
 func _normal_ui() -> void:
 	moving = false
 	interface_toggle(main_interfaces, 1)
-	interface_toggle(reparent_buttons, 0)
+	interface_toggle(move_buttons, 0)
 	update()
 
-func _reparent_ui():
+func _move_ui() -> void:
 	moving = true
 	moving_selected = animtree_all_items.find_key(animtree.get_selected())
 	interface_toggle(main_interfaces, 0)
-	interface_toggle(reparent_buttons, 1)
+	interface_toggle(move_buttons, 1)
 	update()
 
 func _on_confirm_reparent_button_pressed():
 	_move_animtree_item()
 	_normal_ui()	
 
-func _on_cancel_reparent_button_pressed():	
+func _on_cancel_move_button_pressed():	
 	_normal_ui()	
 
 ## Action Selected
