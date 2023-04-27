@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b23d61k0qabq0"]
+[gd_scene load_steps=22 format=3 uid="uid://b23d61k0qabq0"]
 
 [ext_resource type="Script" path="res://addons/ui-anim-framework/gui/components/animations/animation_creator.gd" id="1_asyqv"]
 [ext_resource type="PackedScene" uid="uid://bp8oqgph1ih14" path="res://addons/ui-anim-framework/gui/components/animations/sub_components/ease_curve_visualiser.tscn" id="2_8hb1o"]
 [ext_resource type="Texture2D" uid="uid://cbk7b0my0yit6" path="res://addons/ui-anim-framework/gui/icons/tools/reparent_down_icon.png" id="3_eehmw"]
 [ext_resource type="Texture2D" uid="uid://b7xfh6clmgw2m" path="res://addons/ui-anim-framework/gui/icons/tools/reparent_up_icon.png" id="4_bxis2"]
 [ext_resource type="Texture2D" uid="uid://cl2mbi8d2jjr0" path="res://addons/ui-anim-framework/gui/icons/tools/cancel_icon.png" id="4_hwqf3"]
+[ext_resource type="Texture2D" uid="uid://dvers8l8w2kul" path="res://addons/ui-anim-framework/gui/icons/tools/select_up_icon.png" id="4_x2ct4"]
 [ext_resource type="Texture2D" uid="uid://cvxpft4dkv45o" path="res://addons/ui-anim-framework/gui/icons/gdaction/action_icon.png" id="5_jtpys"]
 [ext_resource type="Texture2D" uid="uid://cx088m8x6loav" path="res://addons/ui-anim-framework/gui/icons/tools/delete_icon.png" id="6_2ndn5"]
 [ext_resource type="Texture2D" uid="uid://cmnb1ybli47d3" path="res://addons/ui-anim-framework/gui/icons/gdaction/controlflow_icon.png" id="6_3uyoa"]
@@ -109,9 +110,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("3_eehmw")
 icon_alignment = 1
 
-[node name="CancelMoveButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
+[node name="CancelToolPanel" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/CancelToolPanel"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="CancelMoveButton" type="Button" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/CancelToolPanel"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c0q14")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5r84o")
@@ -119,6 +128,15 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_m1wl1")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_g3s1a")
 icon = ExtResource("4_hwqf3")
 icon_alignment = 1
+
+[node name="MoveDirectionIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/CancelToolPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_x2ct4")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -244,18 +262,6 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
-item_count = 5
-selected = 0
-popup/item_0/text = "None"
-popup/item_0/id = 0
-popup/item_1/text = "Delay"
-popup/item_1/id = 1
-popup/item_2/text = "Speed"
-popup/item_2/id = 2
-popup/item_3/text = "Curve"
-popup/item_3/id = 3
-popup/item_4/text = "Ease"
-popup/item_4/id = 4
 
 [node name="NoPropertyInterface" type="MarginContainer" parent="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer"]
 unique_name_in_owner = true
@@ -365,8 +371,12 @@ popup/item_1/id = 1
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MoveTools/MoveUpButton" to="." method="_on_move_up_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/ControlToolsPanel/MoveTools/MoveDownButton" to="." method="_on_move_down_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/CancelMoveButton" to="." method="_on_cancel_move_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer/CancelToolPanel/CancelMoveButton" to="." method="_on_cancel_move_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/AnimationTree" to="." method="_on_animation_tree_item_selected"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel/AddActionButton" to="." method="_on_add_action_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel/AddControlflowButton" to="." method="_on_add_controlflow_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel/AddChainingButton" to="." method="_on_add_chaining_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/AnimationTreeInterface/VBoxContainer2/CreateToolsPanel/DeleteGDButton" to="." method="_on_delete_gd_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/InstructionsInterface/ConfirmReparentButton" to="." method="_on_confirm_reparent_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/PropertyOptionsButton" to="." method="_on_property_options_button_item_selected"]
 [connection signal="drag_ended" from="HBoxContainer/VBoxContainer/AnimationToolsInterface/PropertiesInterface/PropertyTypeInterface/HBoxContainer/EasingInterface/EasingControls/EasingValueSlider" to="." method="_on_easing_value_slider_drag_ended"]

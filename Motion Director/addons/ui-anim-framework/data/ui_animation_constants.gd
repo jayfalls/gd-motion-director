@@ -15,7 +15,7 @@ enum CONTROL_FLOW {
 	RESUME,
 	CANCEL
 }
-enum ACTIONS {
+enum ACTION {
 	MOVE_TO,
 	MOVE_TO_X,
 	MOVE_TO_Y,
@@ -41,25 +41,52 @@ enum ACTIONS {
 }
 
 # Animation File 
-const SEQUENCE_ROOT: Dictionary = {
+const DEFAULT_ROOT: Dictionary = {
 	"name": "Sequence",
 	"index": 0,
 	"parent": "none",
-	"children": [],
+	"children": ["./Move To"],
 	"val1": null,
 	"val2": null,
+	"val3": null,
 	"property_type": null,
 	"property_val": null
 }
-const GROUP_ROOT: Dictionary = {
-	"name": "Group",
+
+const DEFAULT_CHAINING: Dictionary = {
+	"name": "Sequence",
 	"index": 0,
-	"parent": "none",
+	"parent": ".",
 	"children": [],
 	"val1": null,
 	"val2": null,
+	"val3": null,
 	"property_type": null,
 	"property_val": null
+}
+
+const DEFAULT_CONTROL_FLOW: Dictionary = {
+	"name": "Wait",
+	"index": 0,
+	"parent": ".",
+	"children": [],
+	"val1": 0,
+	"val2": null,
+	"val3": null,
+	"property_type": null,
+	"property_val": null
+}
+
+const DEFAULT_ACTION: Dictionary = {
+	"name": "Move To",
+	"index": 0,
+	"parent": ".",
+	"children": [],
+	"val1": 0,
+	"val2": 0,
+	"val3": null,
+	"property_type": 0,
+	"property_val": 0
 }
 
 # Property Type
