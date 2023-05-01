@@ -93,6 +93,7 @@ func _populate_motions() -> void:
 	var error_dir: DirAccess
 	var error_dirs: PackedInt32Array
 	for motion_folder in settings.motion_folders:
+		print(motion_folder)
 		error_dir = DirAccess.open(motion_folder)
 		if error_dir:
 			motion_folders_list.add_item(_get_rootless_path(motion_folder))

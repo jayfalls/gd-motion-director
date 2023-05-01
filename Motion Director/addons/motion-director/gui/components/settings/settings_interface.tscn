@@ -121,7 +121,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="AnimationFoldersList" type="ItemList" parent="HBoxContainer/MarginContainer/MotionInterface/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="MotionFoldersList" type="ItemList" parent="HBoxContainer/MarginContainer/MotionInterface/HBoxContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 110)
 layout_mode = 2
@@ -217,7 +217,7 @@ layout_mode = 2
 text = "Motion Director
 An easy to work with, modular, extendable framework for animating all the UI and other things in your project
 Jayfalls
-v0.6.9"
+v0.6.10"
 horizontal_alignment = 1
 
 [node name="AboutLinkButton" type="LinkButton" parent="HBoxContainer/MarginContainer/AboutInterface/VBoxContainer"]

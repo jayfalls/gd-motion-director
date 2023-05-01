@@ -337,10 +337,10 @@ func _determine_selected_type() -> void:
 	else:
 		selected_motiontree_type = GDACTION_TYPES.ACTION
 
-func _disable_motiontree_tools() -> void:	
-	add_chaining_button.disabled = true	
-	add_controlflow_button.disabled = true	
-	add_action_button.disabled = true	
+func _disable_motiontree_tools() -> void:
+	add_chaining_button.disabled = true
+	add_controlflow_button.disabled = true
+	add_action_button.disabled = true
 	delete_gd_button.disabled = true
 
 func _set_motiontree_tools() -> void:
@@ -357,6 +357,7 @@ func _set_motiontree_tools() -> void:
 	_set_moving_buttons_disabled(false)
 	var selected_parent: String = motiontree_structure[selected_motiontree_path]["parent"]
 	if motiontree_structure[selected_parent]["children"].size() == 1:
+		_set_moving_buttons_disabled(true)
 		return
 	delete_gd_button.disabled = false
 
@@ -474,10 +475,21 @@ func _determine_new_index(add: bool = true) -> int:
 
 func _add_name_to_parent_children(parent_path: String) -> void:
 	var new_children: PackedStringArray = motiontree_structure[parent_path]["children"]
-	var new_child_path: String = parent_path + "/" + motiontree_structure[editing_selected_path]["name"]
+	var new_child_name: String = editing_selected_path.get_file()
+	var new_child_path: String = parent_path + "/" + new_child_name
+	new_child_path = _fix_duplicates(parent_path, new_child_path)
 	selected_motiontree_path = new_child_path
 	new_children.append(new_child_path)
 	motiontree_structure[parent_path]["children"] = new_children
+
+func _fix_duplicates(parent_path: String, new_path: String) -> String:
+	var temp_path: String = new_path
+	var parent_children: PackedStringArray = motiontree_structure[parent_path]["children"]
+	var count: int = 1
+	while temp_path in parent_children:
+		temp_path = new_path + str(count)
+		count += 1
+	return temp_path
 
 func _update_motiontree_name(remove: bool = false) -> void:
 	if not remove:
@@ -520,6 +532,14 @@ func _create_motiontree_name(creation_parent_path: String, creation_type: int, o
 			new_motiontree_name = action_names[0]
 			new_motiontree_data = MotionDirectorConstants.DEFAULT_ACTION.duplicate()
 	new_motiontree_path = creation_parent_path + "/" + new_motiontree_name
+	var temp_path: String = new_motiontree_path
+	var creation_parent_children: PackedStringArray = motiontree_structure[creation_parent_path]["children"]
+	var count: int = 1
+	while temp_path in creation_parent_children:
+		temp_path = new_motiontree_path + str(count)
+		count += 1
+	new_motiontree_path = temp_path
+	editing_selected_path = new_motiontree_path
 	new_motiontree_data["parent"] = creation_parent_path
 	motiontree_structure[new_motiontree_path] = new_motiontree_data
 	editing_selected_path = new_motiontree_path
