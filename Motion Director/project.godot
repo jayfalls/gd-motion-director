@@ -25,4 +25,4 @@ window/size/viewport_height=600
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-action/plugin.cfg", "res://addons/ui-anim-framework/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-action/plugin.cfg", "res://addons/motion-director/plugin.cfg")

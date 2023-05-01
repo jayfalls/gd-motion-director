@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://2am8ya2j2yyy"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/ui-anim-framework/nodes/ui_animation_controller.gd" id="1_87tl7"]
+[ext_resource type="Script" path="res://addons/motion-director/nodes/motion_controller.gd" id="1_87tl7"]
 
 [node name="Node2D" type="Node2D"]
 

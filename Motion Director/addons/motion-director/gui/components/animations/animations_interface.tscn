@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://omb57i85xwtr"]
+
+[ext_resource type="Script" path="res://addons/motion-director/gui/components/animations/animations_interface.gd" id="1_tfj8e"]
+[ext_resource type="PackedScene" path="res://addons/motion-director/gui/components/animations/animations_file_explorer.tscn" id="2_27o1y"]
+[ext_resource type="PackedScene" path="res://addons/motion-director/gui/components/animations/animation_creator.tscn" id="4_02mq1"]
+
+[node name="AnimationsInterface" type="MarginContainer"]
+script = ExtResource("1_tfj8e")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FileExplorer" parent="HBoxContainer" instance=ExtResource("2_27o1y")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MotionCreator" parent="HBoxContainer" instance=ExtResource("4_02mq1")]
+layout_mode = 2
